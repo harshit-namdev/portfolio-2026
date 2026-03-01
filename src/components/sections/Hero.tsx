@@ -114,21 +114,12 @@ export default function Hero() {
                     </p>
 
                     <HeroName />
-                    {/* SVG Stroke Animated NAMDEV */}
-                    <div ref={nameRef} className="mt-2 mb-2">
-                        <svg viewBox="0 0 500 80" className="w-full max-w-[400px] h-auto">
-                            <symbol id="s-namdev">
-                                <text textAnchor="start" x="0" y="70" className="font-heading font-extrabold" style={{ fontSize: '72px' }}>NAMDEV</text>
-                            </symbol>
-                            <g>
-                                <use xlinkHref="#s-namdev" className="svg-stroke-text" />
-                                <use xlinkHref="#s-namdev" className="svg-stroke-text" />
-                                <use xlinkHref="#s-namdev" className="svg-stroke-text" />
-                                <use xlinkHref="#s-namdev" className="svg-stroke-text" />
-                                <use xlinkHref="#s-namdev" className="svg-stroke-text" />
-                            </g>
-                        </svg>
-                    </div>
+                    <h1
+                        ref={nameRef}
+                        className="text-[clamp(2.5rem,6vw,5rem)] font-heading font-extrabold leading-[1.1] mb-2 text-transparent bg-clip-text bg-gradient-to-r from-accent to-[#7c3aed] mt-2"
+                    >
+                        NAMDEV
+                    </h1>
 
                     <div className="hero-role h-10 md:h-12 mb-6 opacity-0">
                         <h2 className="text-xl md:text-3xl font-medium text-text-secondary">

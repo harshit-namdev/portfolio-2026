@@ -7,23 +7,10 @@
    Creating an optimized production build ...
  ✓ Compiled successfully
    Linting and checking validity of types ...
-   Collecting page data ...
-   Generating static pages (0/5) ...
-   Generating static pages (1/5) 
-   Generating static pages (2/5) 
-   Generating static pages (3/5) 
- ✓ Generating static pages (5/5)
-   Finalizing page optimization ...
-   Collecting build traces ...
 
-Route (app)                              Size     First Load JS
-┌ ○ /                                    76.2 kB         211 kB
-└ ○ /_not-found                          875 B          88.5 kB
-+ First Load JS shared by all            87.6 kB
-  ├ chunks/117-b97c862b24e7235c.js       31.9 kB
-  ├ chunks/fd9d1056-1225178e105cf676.js  53.8 kB
-  └ other shared chunks (total)          1.94 kB
+Failed to compile.
 
+./src/components/sections/Contact.tsx
+6:59  Error: 'ExternalLink' is defined but never used.  @typescript-eslint/no-unused-vars
 
-○  (Static)  prerendered as static content
-
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules

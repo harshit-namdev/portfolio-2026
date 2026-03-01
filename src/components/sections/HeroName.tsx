@@ -1,6 +1,48 @@
 "use client";
 
+import { useEffect } from "react";
+import { gsap } from "gsap";
+
 export default function HeroName() {
+    useEffect(() => {
+        // Draw dash letters
+        const dashPaths = document.querySelectorAll(".hn-dash");
+        dashPaths.forEach((path) => {
+            const el = path as SVGPathElement;
+            el.style.strokeDasharray = "360";
+            el.style.strokeDashoffset = "360";
+        });
+
+        const dashTl = gsap.timeline();
+        dashTl.to(".hn-dash", {
+            strokeDashoffset: 0,
+            duration: 1.5,
+            ease: "power2.inOut",
+            stagger: 0.12,
+            delay: 0.5,
+        });
+
+        // Continuously animate spin letters (A and 2nd H)
+        gsap.to(".hn-spin", {
+            rotation: 360,
+            transformOrigin: "50% 50%",
+            duration: 4,
+            ease: "none",
+            repeat: -1,
+        });
+
+        // After draw-in, float all letters continuously
+        gsap.to(".hero-name-letter", {
+            y: -8,
+            duration: 2.5,
+            ease: "sine.inOut",
+            repeat: -1,
+            yoyo: true,
+            stagger: 0.15,
+            delay: 2.2,
+        });
+    }, []);
+
     return (
         <div className="flex flex-wrap gap-0 items-center mb-4">
             {/* Gradient defs */}
@@ -86,41 +128,6 @@ export default function HeroName() {
             </svg>
 
             <span className="sr-only">HARSHIT</span>
-
-            <style>{`
-                .hn-dash {
-                    stroke-dasharray: 360;
-                    stroke-dashoffset: 360;
-                    animation: hnDash 2.5s ease-in-out forwards, hnFloat 3s ease-in-out 2.5s infinite alternate;
-                }
-                .hn-spin {
-                    stroke-dasharray: 360;
-                    stroke-dashoffset: 0;
-                    animation: hnSpin 6s ease-in-out infinite, hnFloat 3s ease-in-out 2.5s infinite alternate;
-                }
-                .hero-name-letter:nth-child(2) .hn-dash { animation-delay: 0.1s, 2.6s; }
-                .hero-name-letter:nth-child(3) .hn-dash { animation-delay: 0.2s, 2.7s; }
-                .hero-name-letter:nth-child(4) .hn-dash { animation-delay: 0.15s, 2.65s; }
-                .hero-name-letter:nth-child(5) .hn-dash { animation-delay: 0.3s, 2.8s; }
-                .hero-name-letter:nth-child(6) .hn-spin { animation-delay: 0s, 2.5s; }
-                .hero-name-letter:nth-child(7) .hn-dash { animation-delay: 0.4s, 2.9s; }
-                .hero-name-letter:nth-child(8) .hn-dash { animation-delay: 0.5s, 3.0s; }
-
-                @keyframes hnDash {
-                    0% { stroke-dashoffset: 360; }
-                    100% { stroke-dashoffset: 0; }
-                }
-                @keyframes hnSpin {
-                    0%, 100% { transform: rotate(0deg); }
-                    25% { transform: rotate(90deg); }
-                    50% { transform: rotate(180deg); }
-                    75% { transform: rotate(270deg); }
-                }
-                @keyframes hnFloat {
-                    0% { transform: translateY(0); }
-                    100% { transform: translateY(-6px); }
-                }
-            `}</style>
         </div>
     );
 }

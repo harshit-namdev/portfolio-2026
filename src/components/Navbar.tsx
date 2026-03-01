@@ -77,8 +77,10 @@ export default function Navbar() {
                 transition={{ duration: 0.3, ease: "easeInOut" }}
             >
                 <div className="flex-1">
-                    <Link href="#home" className="text-accent text-2xl font-extrabold tracking-tight">
-                        harshit.
+                    <Link href="#home" className="flex items-center gap-1 group">
+                        <span className="text-accent text-xl md:text-2xl font-extrabold tracking-tight uppercase">HARSHIT</span>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7c3aed] to-accent text-xl md:text-2xl font-extrabold tracking-tight uppercase">NAMDEV</span>
+                        <span className="w-2 h-2 rounded-full bg-accent ml-1 group-hover:shadow-[0_0_10px_var(--accent)] transition-shadow duration-300" />
                     </Link>
                 </div>
 

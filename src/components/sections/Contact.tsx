@@ -1,16 +1,13 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useGSAP } from "@/hooks/useGSAP";
 import { gsap } from "gsap";
-
+import { Github, Linkedin, Mail, Phone, MapPin, Download, ExternalLink } from "lucide-react";
 import MagneticButton from "../MagneticButton";
-import { Check, Loader2 } from "lucide-react";
 
 export default function Contact() {
     const sectionRef = useRef<HTMLElement>(null);
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
 
     useGSAP(() => {
         gsap.fromTo(
@@ -30,111 +27,149 @@ export default function Contact() {
         );
     }, { scope: sectionRef });
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        // Simulate network request
-        setTimeout(() => {
-            setIsSubmitting(false);
-            setIsSuccess(true);
-            // Reset after a while
-            setTimeout(() => setIsSuccess(false), 3000);
-        }, 1500);
-    };
-
     return (
-        <section id="contact" ref={sectionRef} className="py-24 md:py-32 relative min-h-[80vh] flex flex-col justify-center">
+        <>
+            {/* Contact Section */}
+            <section id="contact" ref={sectionRef} className="py-24 md:py-32 relative">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 blur-[150px] rounded-full pointer-events-none z-0" />
 
-            {/* Background Gradient */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 blur-[150px] rounded-full pointer-events-none z-0"></div>
-
-            <div className="max-w-3xl mx-auto px-6 w-full relative z-10">
-                <div className="text-center mb-16 contact-reveal">
-                    <p className="font-mono text-accent text-sm md:text-base tracking-[3px] uppercase mb-4">05. What&apos;s Next?</p>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-text-primary mb-6">
-                        Get In Touch
-                    </h2>
-                    <p className="text-text-secondary text-base md:text-lg max-w-xl mx-auto leading-relaxed">
-                        I&apos;m currently open to new opportunities, whether it&apos;s a full-time role, internship, or freelance project.
-                        If you have a question or just want to connect, my inbox is always open!
-                    </p>
-                </div>
-
-                <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto contact-reveal">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="relative group">
-                            <input
-                                type="text"
-                                id="name"
-                                required
-                                className="w-full bg-bg-card border border-border rounded-xl px-5 pt-7 pb-3 outline-none text-text-primary focus:border-accent focus:shadow-[0_0_15px_var(--accent-glow)] transition-all duration-300 peer"
-                                placeholder=" "
-                            />
-                            <label htmlFor="name" className="absolute left-5 top-5 text-text-muted text-sm transition-all duration-300 peer-focus:-translate-y-3 peer-focus:text-xs peer-focus:text-accent peer-[:not(:placeholder-shown)]:-translate-y-3 peer-[:not(:placeholder-shown)]:text-xs cursor-text">
-                                Your Name
-                            </label>
-                        </div>
-                        <div className="relative group">
-                            <input
-                                type="email"
-                                id="email"
-                                required
-                                className="w-full bg-bg-card border border-border rounded-xl px-5 pt-7 pb-3 outline-none text-text-primary focus:border-accent focus:shadow-[0_0_15px_var(--accent-glow)] transition-all duration-300 peer"
-                                placeholder=" "
-                            />
-                            <label htmlFor="email" className="absolute left-5 top-5 text-text-muted text-sm transition-all duration-300 peer-focus:-translate-y-3 peer-focus:text-xs peer-focus:text-accent peer-[:not(:placeholder-shown)]:-translate-y-3 peer-[:not(:placeholder-shown)]:text-xs cursor-text">
-                                Email Address
-                            </label>
-                        </div>
+                <div className="max-w-6xl mx-auto px-6 relative z-10">
+                    <div className="text-center mb-16 contact-reveal">
+                        <p className="font-mono text-accent text-sm md:text-base tracking-[3px] uppercase mb-4">05. What&apos;s Next?</p>
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-text-primary mb-6">
+                            Get In Touch
+                        </h2>
+                        <p className="text-text-secondary text-base md:text-lg max-w-xl mx-auto leading-relaxed">
+                            Ready to bring your ideas to life? Let&apos;s connect and discuss how we can work together.
+                        </p>
                     </div>
 
-                    <div className="relative group">
-                        <input
-                            type="text"
-                            id="subject"
-                            required
-                            className="w-full bg-bg-card border border-border rounded-xl px-5 pt-7 pb-3 outline-none text-text-primary focus:border-accent focus:shadow-[0_0_15px_var(--accent-glow)] transition-all duration-300 peer"
-                            placeholder=" "
-                        />
-                        <label htmlFor="subject" className="absolute left-5 top-5 text-text-muted text-sm transition-all duration-300 peer-focus:-translate-y-3 peer-focus:text-xs peer-focus:text-accent peer-[:not(:placeholder-shown)]:-translate-y-3 peer-[:not(:placeholder-shown)]:text-xs cursor-text">
-                            Subject
-                        </label>
+                    {/* Contact Cards Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-16">
+                        {/* Email */}
+                        <a href="mailto:harshitnamdev86@gmail.com" className="contact-reveal group bg-bg-card border border-border rounded-2xl p-8 flex flex-col items-center text-center gap-4 hover:border-accent/50 hover:shadow-[0_0_30px_rgba(100,255,218,0.1)] transition-all duration-300 hover:-translate-y-1">
+                            <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                                <Mail className="w-6 h-6 text-accent" />
+                            </div>
+                            <h3 className="text-text-primary font-heading font-bold text-lg">Email</h3>
+                            <p className="text-text-muted text-sm font-mono">harshitnamdev86@gmail.com</p>
+                        </a>
+
+                        {/* Phone */}
+                        <a href="tel:+917987251569" className="contact-reveal group bg-bg-card border border-border rounded-2xl p-8 flex flex-col items-center text-center gap-4 hover:border-accent/50 hover:shadow-[0_0_30px_rgba(100,255,218,0.1)] transition-all duration-300 hover:-translate-y-1">
+                            <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                                <Phone className="w-6 h-6 text-accent" />
+                            </div>
+                            <h3 className="text-text-primary font-heading font-bold text-lg">Phone</h3>
+                            <p className="text-text-muted text-sm font-mono">+91 798 725 1569</p>
+                        </a>
+
+                        {/* LinkedIn */}
+                        <a href="https://linkedin.com/in/harshit-namdev" target="_blank" rel="noopener noreferrer" className="contact-reveal group bg-bg-card border border-border rounded-2xl p-8 flex flex-col items-center text-center gap-4 hover:border-accent/50 hover:shadow-[0_0_30px_rgba(100,255,218,0.1)] transition-all duration-300 hover:-translate-y-1">
+                            <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                                <Linkedin className="w-6 h-6 text-accent" />
+                            </div>
+                            <h3 className="text-text-primary font-heading font-bold text-lg">LinkedIn</h3>
+                            <p className="text-text-muted text-sm font-mono">Connect with me</p>
+                        </a>
                     </div>
 
-                    <div className="relative group">
-                        <textarea
-                            id="message"
-                            required
-                            rows={5}
-                            className="w-full bg-bg-card border border-border rounded-xl px-5 pt-7 pb-3 outline-none text-text-primary focus:border-accent focus:shadow-[0_0_15px_var(--accent-glow)] transition-all duration-300 peer resize-none"
-                            placeholder=" "
-                        ></textarea>
-                        <label htmlFor="message" className="absolute left-5 top-5 text-text-muted text-sm transition-all duration-300 peer-focus:-translate-y-3 peer-focus:text-xs peer-focus:text-accent peer-[:not(:placeholder-shown)]:-translate-y-3 peer-[:not(:placeholder-shown)]:text-xs cursor-text">
-                            Your Message
-                        </label>
-                    </div>
-
-                    <div className="flex justify-center pt-4">
+                    {/* CTA Buttons */}
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 contact-reveal">
                         <MagneticButton>
-                            <button
-                                type="submit"
-                                disabled={isSubmitting || isSuccess}
-                                className="flex items-center justify-center gap-2 bg-accent text-bg-primary px-10 py-4 rounded-full font-semibold hover:brightness-110 shadow-[0_10px_30px_rgba(100,255,218,0.2)] transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed min-w-[200px]"
+                            <a
+                                href="mailto:harshitnamdev86@gmail.com"
+                                className="group flex items-center justify-center gap-2 bg-accent text-bg-primary px-10 py-4 rounded-full font-semibold hover:brightness-110 shadow-[0_10px_30px_rgba(100,255,218,0.2)] transition-all duration-300"
                             >
-                                {isSubmitting ? (
-                                    <Loader2 className="animate-spin w-5 h-5" />
-                                ) : isSuccess ? (
-                                    <>
-                                        <Check className="w-5 h-5" /> Sent Successfully
-                                    </>
-                                ) : (
-                                    "Say Hello 👋"
-                                )}
-                            </button>
+                                Say Hello 👋
+                            </a>
+                        </MagneticButton>
+                        <MagneticButton>
+                            <a
+                                href="/resume/gen web/Harshit Namdev Resume.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group flex items-center justify-center gap-2 border border-accent text-accent px-10 py-4 rounded-full font-semibold hover:bg-accent-subtle transition-all duration-300"
+                            >
+                                <Download size={18} />
+                                Download Resume
+                            </a>
                         </MagneticButton>
                     </div>
-                </form>
-            </div>
-        </section>
+                </div>
+            </section>
+
+            {/* Footer */}
+            <footer className="border-t border-border bg-bg-secondary py-16">
+                <div className="max-w-6xl mx-auto px-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                        {/* Brand */}
+                        <div>
+                            <h3 className="text-2xl font-heading font-extrabold text-text-primary mb-3">HARSHIT NAMDEV</h3>
+                            <p className="text-text-muted text-sm mb-4">Cybersecurity Professional</p>
+                            <p className="text-text-secondary text-sm leading-relaxed">
+                                Passionate about protecting digital assets and creating secure systems. Specializing in penetration testing, web security, and ethical hacking.
+                            </p>
+                        </div>
+
+                        {/* Quick Links */}
+                        <div>
+                            <h4 className="text-text-primary font-heading font-bold text-lg mb-4">Quick Links</h4>
+                            <ul className="space-y-2">
+                                {["Home", "About", "Skills", "Projects", "Experience", "Contact"].map((link) => (
+                                    <li key={link}>
+                                        <a href={`#${link.toLowerCase()}`} className="text-text-muted text-sm hover:text-accent transition-colors flex items-center gap-2">
+                                            <span className="text-accent text-xs">▹</span> {link}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {/* Contact Info */}
+                        <div>
+                            <h4 className="text-text-primary font-heading font-bold text-lg mb-4">Contact Info</h4>
+                            <ul className="space-y-3">
+                                <li className="flex items-center gap-3 text-text-muted text-sm">
+                                    <Mail size={16} className="text-accent shrink-0" />
+                                    harshitnamdev86@gmail.com
+                                </li>
+                                <li className="flex items-center gap-3 text-text-muted text-sm">
+                                    <Phone size={16} className="text-accent shrink-0" />
+                                    +91 798 725 1569
+                                </li>
+                                <li className="flex items-center gap-3 text-text-muted text-sm">
+                                    <MapPin size={16} className="text-accent shrink-0" />
+                                    Bhopal, MP, India
+                                </li>
+                            </ul>
+
+                            {/* Social Icons */}
+                            <div className="flex gap-4 mt-6">
+                                <a href="https://github.com/harshit-namdev" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-bg-card border border-border flex items-center justify-center text-text-muted hover:text-accent hover:border-accent/50 transition-all">
+                                    <Github size={18} />
+                                </a>
+                                <a href="https://linkedin.com/in/harshit-namdev" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-bg-card border border-border flex items-center justify-center text-text-muted hover:text-accent hover:border-accent/50 transition-all">
+                                    <Linkedin size={18} />
+                                </a>
+                                <a href="mailto:harshitnamdev86@gmail.com" className="w-10 h-10 rounded-full bg-bg-card border border-border flex items-center justify-center text-text-muted hover:text-accent hover:border-accent/50 transition-all">
+                                    <Mail size={18} />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Bottom Bar */}
+                    <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
+                        <p className="text-text-dim text-xs font-mono">
+                            © 2025 HARSHIT NAMDEV. All rights reserved.
+                        </p>
+                        <p className="text-text-dim text-xs font-mono">
+                            Designed & Developed by Harshit
+                        </p>
+                    </div>
+                </div>
+            </footer>
+        </>
     );
 }
