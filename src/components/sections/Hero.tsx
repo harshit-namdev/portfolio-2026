@@ -14,6 +14,8 @@ const ROLES = [
     "Ethical Hacker",
 ];
 
+import HeroName from "./HeroName";
+
 export default function Hero() {
     const containerRef = useRef<HTMLElement>(null);
     const nameRef = useRef<HTMLHeadingElement>(null);
@@ -115,12 +117,13 @@ export default function Hero() {
                         👋 Hello, I&apos;m
                     </p>
 
+                    <HeroName />
                     <h1
                         ref={nameRef}
-                        className="text-[clamp(3.5rem,8vw,7rem)] font-heading font-extrabold leading-[1.1] mb-2 text-transparent bg-clip-text bg-gradient-to-r from-accent to-[#7c3aed]"
+                        className="text-[clamp(2.5rem,6vw,5rem)] font-heading font-extrabold leading-[1.1] mb-2 text-transparent bg-clip-text bg-gradient-to-r from-accent to-[#7c3aed] mt-2"
                         style={{ paddingBottom: '0.2em', marginBottom: '-0.2em' }} // Prevent clipping of gradient text
                     >
-                        HARSHIT<br />NAMDEV
+                        NAMDEV
                     </h1>
 
                     <div className="hero-role h-10 md:h-12 mb-6 opacity-0">
@@ -155,7 +158,7 @@ export default function Hero() {
                         <div className="hero-cta opacity-0">
                             <MagneticButton>
                                 <a
-                                    href="/resume/Harshit_Namdev_Resume.pdf"
+                                    href="/resume/gen web/Harshit Namdev Resume.pdf"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="group flex items-center justify-center gap-2 bg-transparent border border-accent text-accent px-8 py-4 rounded-full font-semibold hover:bg-accent-subtle hover:-translate-y-[2px] hover:shadow-[0_10px_40px_var(--accent-glow)] transition-all duration-300"

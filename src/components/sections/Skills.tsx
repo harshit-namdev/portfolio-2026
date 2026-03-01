@@ -1,12 +1,13 @@
 "use client";
 
 import { useRef } from "react";
+import { motion } from "framer-motion";
 import { SectionHeading } from "../SectionHeading";
 import { useGSAP } from "@/hooks/useGSAP";
 import { gsap } from "gsap";
 // Using lucide-react for some generic icons since we can't easily npm install devicons right now without adding more heavy packages, 
 // though we can use simple colored text or native SVGs for them. We will use simple placeholders for now.
-import { Code2, Server, Wrench, Database, Globe, Cpu } from "lucide-react";
+import { Code2, Server, Wrench, Globe } from "lucide-react";
 
 const SKILL_CATEGORIES = [
     {
@@ -34,8 +35,8 @@ export default function Skills() {
 
     useGSAP(() => {
         // Reveal categories
-        const categories = gsap.utils.toArray(".skill-category");
-        categories.forEach((cat: any) => {
+        const categories: HTMLElement[] = gsap.utils.toArray(".skill-category");
+        categories.forEach((cat) => {
             gsap.fromTo(
                 cat,
                 { y: 60, opacity: 0 },
@@ -89,15 +90,17 @@ export default function Skills() {
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 {category.skills.map((skill, sIdx) => (
-                                    <div
+                                    <motion.div
                                         key={sIdx}
-                                        className="skill-card flex flex-col items-center justify-center p-4 h-[100px] bg-bg-card border border-border rounded-2xl group transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] hover:-translate-y-2 hover:border-border-accent hover:shadow-[0_15px_40px_rgba(0,0,0,0.2),_0_0_20px_var(--accent-glow)] hover:bg-[length:100%_100%] hover:brightness-110"
+                                        whileHover={{ scale: 1.05, y: -5 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className="skill-card flex flex-col items-center justify-center p-4 h-[100px] bg-bg-card border border-border rounded-2xl group transition-colors duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] hover:border-accent/50 hover:shadow-[0_10px_30px_rgba(100,255,218,0.15)] cursor-pointer"
                                     >
-                                        <Code2 className="w-8 h-8 text-text-muted mb-2 group-hover:text-accent group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300" />
+                                        <Code2 className="w-8 h-8 text-text-muted mb-2 group-hover:text-accent transition-colors duration-300" />
                                         <span className="text-xs text-text-secondary font-medium text-center">
                                             {skill}
                                         </span>
-                                    </div>
+                                    </motion.div>
                                 ))}
                             </div>
                         </div>

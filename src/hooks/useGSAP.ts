@@ -11,15 +11,15 @@ const useIsomorphicLayoutEffect =
 
 interface UseGSAPOptions {
     scope?: RefObject<HTMLElement | null>;
-    dependencies?: any[];
+    dependencies?: unknown[];
 }
 
 export function useGSAP(
     callback: (context: gsap.Context) => void,
-    options: UseGSAPOptions | any[] = []
+    options: UseGSAPOptions | unknown[] = []
 ) {
     const isOptionsObject = !Array.isArray(options);
-    const dependencies = isOptionsObject ? (options as UseGSAPOptions).dependencies || [] : options as any[];
+    const dependencies = isOptionsObject ? (options as UseGSAPOptions).dependencies || [] : options as unknown[];
     const scope = isOptionsObject ? (options as UseGSAPOptions).scope : undefined;
 
     useIsomorphicLayoutEffect(() => {

@@ -1,56 +1,68 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@/hooks/useGSAP";
 
 export default function Preloader() {
     const [isLoading, setIsLoading] = useState(true);
     const containerRef = useRef<HTMLDivElement>(null);
-    const textRef = useRef<HTMLHeadingElement>(null);
-    const progressRef = useRef<HTMLDivElement>(null);
+    const terminalRef = useRef<HTMLDivElement>(null);
+    const line1Ref = useRef<HTMLParagraphElement>(null);
+    const line2Ref = useRef<HTMLParagraphElement>(null);
+    const line3Ref = useRef<HTMLParagraphElement>(null);
+    const line4Ref = useRef<HTMLParagraphElement>(null);
 
     useGSAP(() => {
         const tl = gsap.timeline({
             onComplete: () => {
-                setIsLoading(false);
+                setTimeout(() => setIsLoading(false), 500);
             },
         });
 
-        // Step 1: Initials pulse and line expansion
-        tl.to(textRef.current, {
-            scale: 1.1,
-            duration: 1,
-            yoyo: true,
-            repeat: 1,
-            ease: "power2.inOut",
+        // Initialize terminal text as hidden
+        gsap.set([line1Ref.current, line2Ref.current, line3Ref.current, line4Ref.current], {
+            opacity: 0,
+            display: "none"
+        });
+
+        // Hacker terminal sequence
+        tl.to(terminalRef.current, {
+            opacity: 1,
+            scale: 1,
+            duration: 0.5,
+            ease: "back.out(1.7)"
         })
-            .to(
-                progressRef.current,
-                {
-                    width: "200px",
-                    duration: 2,
-                    ease: "power2.inOut",
-                },
-                "<"
-            )
-            // Step 2: Exit animations
-            .to(
-                [textRef.current, progressRef.current],
-                {
-                    y: -50,
-                    opacity: 0,
-                    duration: 0.5,
-                    ease: "power3.in",
-                },
-                "+=0.2"
-            )
+            .set(line1Ref.current, { display: "block", opacity: 1 }, "+=0.3")
+            .fromTo(line1Ref.current, { width: 0 }, { width: "100%", duration: 0.8, ease: "steps(20)" })
+
+            .set(line2Ref.current, { display: "block", opacity: 1 }, "+=0.5")
+            .fromTo(line2Ref.current, { opacity: 0 }, { opacity: 1, duration: 0.1 })
+
+            .set(line3Ref.current, { display: "block", opacity: 1 }, "+=0.6")
+            .fromTo(line3Ref.current, { opacity: 0 }, { opacity: 1, duration: 0.1 })
+
+            .set(line4Ref.current, { display: "block", opacity: 1 }, "+=0.4")
+            .fromTo(line4Ref.current, { opacity: 0 }, { opacity: 1, duration: 0.1 })
+
+            // Optional glitch effect at the end
+            .to(terminalRef.current, {
+                x: () => Math.random() * 10 - 5,
+                y: () => Math.random() * 10 - 5,
+                duration: 0.05,
+                repeat: 5,
+                yoyo: true,
+                ease: "none"
+            }, "+=0.5")
+
+            // Exit
             .to(containerRef.current, {
-                yPercent: -100,
-                duration: 0.8,
-                ease: "power4.inOut",
-            });
-    }, { scope: containerRef }); // Use scope for better clean up
+                opacity: 0,
+                duration: 0.5,
+                ease: "power2.inOut",
+            }, "+=0.5");
+
+    }, { scope: containerRef });
 
     if (!isLoading) return null;
 
@@ -59,17 +71,36 @@ export default function Preloader() {
             ref={containerRef}
             className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#050505]"
         >
-            <h1
-                ref={textRef}
-                className="text-4xl md:text-5xl font-heading font-bold text-accent tracking-widest mb-6"
+            <div
+                ref={terminalRef}
+                className="w-[90%] max-w-[500px] border border-[#1a1a1a] rounded-xl bg-[#0a0a0a] shadow-[0_0_30px_rgba(0,0,0,0.8)] overflow-hidden opacity-0 scale-95"
             >
-                HN
-            </h1>
-            <div className="h-[2px] w-0 bg-accent relative overflow-hidden rounded-full">
-                <div
-                    ref={progressRef}
-                    className="absolute inset-0 bg-white opacity-50 shadow-[0_0_10px_var(--accent)]"
-                />
+                {/* Terminal Header */}
+                <div className="flex items-center justify-between px-4 py-3 border-b border-[#1a1a1a] bg-[#111]">
+                    <div className="flex gap-2">
+                        <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+                        <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                        <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+                    </div>
+                    <div className="text-[#444] text-xs font-mono font-medium tracking-widest">SITE ACCESS</div>
+                    <div className="w-12"></div>
+                </div>
+
+                {/* Terminal Body */}
+                <div className="p-6 font-mono text-sm md:text-base flex flex-col gap-4">
+                    <p ref={line1Ref} className="text-[#3b82f6] whitespace-nowrap overflow-hidden">
+                        root@security:~$ <span className="text-[#64ffda]">accessing_site...</span>
+                    </p>
+                    <p ref={line2Ref} className="text-red-500 font-bold tracking-wider">
+                        SITE HACKED ...
+                    </p>
+                    <p ref={line3Ref} className="text-red-500 tracking-wider">
+                        ACCESS COMPLETE <span className="text-green-500">✓</span>
+                    </p>
+                    <p ref={line4Ref} className="text-[#1a1a1a] font-bold textShadow-matrix tracking-widest mt-2 terminal-glitch relative">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-700 to-gray-500">SITE UNLOCKED 🔓</span>
+                    </p>
+                </div>
             </div>
         </div>
     );

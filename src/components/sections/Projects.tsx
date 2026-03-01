@@ -14,7 +14,7 @@ const FEATURED_PROJECTS = [
         tech: ["Flask", "Python", "Cryptography", "Steganography"],
         github: "https://github.com/harshit-namdev",
         url: "https://harshitnamdev.netlify.app/",
-        image: "/images/projects/stagnolab.webp",
+        image: "/images/projects/stagno-lab-project.png",
     },
     {
         title: "VulScan: Vulnerability & Network Scanner",
@@ -22,7 +22,7 @@ const FEATURED_PROJECTS = [
         tech: ["Python", "PyQt5", "Nmap", "Network Security"],
         github: "https://github.com/harshit-namdev",
         url: "",
-        image: "/images/projects/vulscan.webp",
+        image: "/images/projects/vulscan-project.jpg",
     },
     {
         title: "Anti-DDoS Tool for Websites",
@@ -30,7 +30,7 @@ const FEATURED_PROJECTS = [
         tech: ["Bash", "Linux", "Traffic Analysis", "IP Filtering"],
         github: "https://github.com/harshit-namdev/storm-bloker-anti-ddos-tool",
         url: "",
-        image: "/images/projects/ddos.webp",
+        image: "/images/achieve/news24ddos.png",
     }
 ];
 
@@ -64,8 +64,8 @@ export default function Projects() {
 
     useGSAP(() => {
         // Reveal Featured Projects
-        const featuredBlocks = gsap.utils.toArray(".featured-project");
-        featuredBlocks.forEach((block: any, i) => {
+        const featuredBlocks: HTMLElement[] = gsap.utils.toArray(".featured-project");
+        featuredBlocks.forEach((block, i) => {
             const isOdd = i % 2 !== 0; // Check order for alternating entrance directions
             gsap.fromTo(
                 block,
@@ -125,63 +125,55 @@ export default function Projects() {
             <div className="max-w-6xl mx-auto px-6">
                 <SectionHeading number="03." title="Featured Projects" />
 
-                <div className="mt-16 space-y-24 md:space-y-32">
+                <div className="mt-16 space-y-16 md:space-y-32">
                     {FEATURED_PROJECTS.map((project, idx) => {
                         const isOdd = idx % 2 !== 0;
                         return (
-                            <div key={idx} className={`featured-project relative grid grid-cols-1 md:grid-cols-12 gap-8 items-center`}>
+                            <div key={idx} className={`featured-project relative flex flex-col ${isOdd ? 'md:flex-row-reverse' : 'md:flex-row'} gap-8 lg:gap-16 items-center`}>
 
                                 {/* Image Side */}
-                                <div
-                                    className={`project-img-container relative md:col-span-7 h-[300px] md:h-[400px] rounded-xl overflow-hidden shadow-2xl group ${isOdd ? "md:order-2 md:col-start-6" : "md:col-start-1"
-                                        }`}
-                                >
-                                    <div className="absolute inset-0 bg-accent/20 z-10 mix-blend-multiply transition-opacity duration-300 group-hover:opacity-0" />
-                                    <div className="w-full h-full bg-bg-card flex items-center justify-center relative grayscale hover:grayscale-0 transition-all duration-500 overflow-hidden cursor-pointer" onClick={() => project.url ? window.open(project.url, "_blank") : project.github ? window.open(project.github, "_blank") : null}>
-                                        {/* Try to load Next Image, fallback to SVG if missing */}
-                                        <span className="sr-only">Project Image for {project.title}</span>
-                                        <div className="absolute inset-0 z-0 bg-bg-elevated flex items-center justify-center">
-                                            <span className="text-text-dim text-sm font-mono">Image coming soon</span>
-                                        </div>
+                                <div className="project-img-container relative w-full md:w-1/2 h-[300px] sm:h-[400px] rounded-2xl overflow-hidden shadow-2xl group">
+                                    <div className="absolute inset-0 bg-accent/20 z-10 transition-opacity duration-500 group-hover:opacity-0 pointer-events-none" />
+                                    <div className="w-full h-full bg-bg-card relative cursor-pointer" onClick={() => project.url ? window.open(project.url, "_blank") : project.github ? window.open(project.github, "_blank") : null}>
                                         <Image
                                             src={project.image}
                                             alt={project.title}
                                             fill
-                                            className="object-cover relative z-10 transition-transform duration-700 ease-out group-hover:scale-105"
+                                            className="object-cover relative z-0 transition-transform duration-700 ease-out group-hover:scale-110"
                                             onError={(e) => { e.currentTarget.style.display = 'none'; }}
                                         />
                                     </div>
                                 </div>
 
                                 {/* Text Side */}
-                                <div
-                                    className={`relative md:col-span-6 z-20 ${isOdd ? "md:col-start-1 md:text-left" : "md:col-start-7 md:text-right"
-                                        }`}
-                                >
-                                    <p className="text-accent font-mono text-sm uppercase tracking-wider mb-2">Featured Project</p>
-                                    <h3 className="text-2xl md:text-3xl font-heading font-bold text-text-primary mb-6 hover:text-accent transition-colors cursor-pointer" onClick={() => project.url ? window.open(project.url, "_blank") : project.github ? window.open(project.github, "_blank") : null}>
+                                <div className="relative w-full md:w-1/2 z-20 flex flex-col justify-center">
+                                    <p className="text-accent font-mono text-sm uppercase tracking-wider mb-3">Featured Project</p>
+                                    <h3
+                                        className="text-3xl md:text-4xl font-heading font-bold text-text-primary mb-6 hover:text-accent transition-colors cursor-pointer"
+                                        onClick={() => project.url ? window.open(project.url, "_blank") : project.github ? window.open(project.github, "_blank") : null}
+                                    >
                                         {project.title}
                                     </h3>
 
-                                    <div className="bg-bg-card border border-border p-6 rounded-xl shadow-[0_10px_30px_-15px_rgba(0,0,0,0.5)] mb-6 hover:border-border-accent transition-colors duration-300">
-                                        <p className="text-text-secondary text-sm md:text-base leading-relaxed">
+                                    <div className="bg-bg-card/80 backdrop-blur-sm border border-border p-6 md:p-8 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] mb-8 hover:border-accent/50 transition-colors duration-300 relative z-30">
+                                        <p className="text-text-secondary text-base md:text-lg leading-relaxed">
                                             {project.description}
                                         </p>
                                     </div>
 
-                                    <ul className={`flex flex-wrap gap-4 font-mono text-xs text-text-muted mb-6 ${isOdd ? "justify-start" : "justify-start md:justify-end"}`}>
+                                    <ul className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-sm text-text-muted mb-8 relative z-30">
                                         {project.tech.map((t, i) => <li key={i}>{t}</li>)}
                                     </ul>
 
-                                    <div className={`flex items-center gap-4 ${isOdd ? "justify-start" : "justify-start md:justify-end"}`}>
+                                    <div className="flex items-center gap-6 relative z-30">
                                         {project.github && (
-                                            <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent transition-colors" aria-label="GitHub Link">
-                                                <Github size={20} />
+                                            <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent transition-transform hover:scale-110" aria-label="GitHub Link">
+                                                <Github size={24} />
                                             </a>
                                         )}
                                         {project.url && (
-                                            <a href={project.url} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent transition-colors" aria-label="External Link">
-                                                <ExternalLink size={20} />
+                                            <a href={project.url} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent transition-transform hover:scale-110" aria-label="External Link">
+                                                <ExternalLink size={24} />
                                             </a>
                                         )}
                                     </div>
