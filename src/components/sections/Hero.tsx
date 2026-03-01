@@ -153,7 +153,7 @@ export default function Hero() {
                         <div className="hero-cta opacity-0">
                             <MagneticButton>
                                 <a
-                                    href="/resume/soc gen/Harshit Namdev Resume.pdf"
+                                    href="/resume/Harshit-Namdev-Resume.pdf"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="group flex items-center justify-center gap-2 bg-transparent border border-accent text-accent px-8 py-4 rounded-full font-semibold hover:bg-accent-subtle hover:-translate-y-[2px] hover:shadow-[0_10px_40px_var(--accent-glow)] transition-all duration-300"

@@ -96,7 +96,7 @@ export default function Navbar() {
                     ))}
                     <MagneticButton>
                         <a
-                            href="/resume/soc gen/Harshit Namdev Resume.pdf"
+                            href="/resume/Harshit-Namdev-Resume.pdf"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="ml-4 px-5 py-2 rounded-full border border-accent text-accent text-sm font-medium hover:bg-[var(--accent-subtle)] hover:border-accent hover:shadow-[0_0_15px_var(--accent-glow)] transition-all duration-300 transform -translate-y-0.5 inline-block"
@@ -143,7 +143,7 @@ export default function Navbar() {
                             ))}
                             <div className="overflow-hidden mt-8">
                                 <a
-                                    href="/resume/soc gen/Harshit Namdev Resume.pdf"
+                                    href="/resume/Harshit-Namdev-Resume.pdf"
                                     target="_blank"
                                     className="mobile-link px-8 py-3 rounded-full border border-accent text-accent text-lg font-medium"
                                     onClick={() => setIsMobileMenuOpen(false)}
