@@ -105,15 +105,11 @@ export default function About() {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
                                 <Image
-                                    src="/images/my-photos/harshit.jpg"
+                                    src="/images/my-photos/harshit-namdev.jpg"
                                     alt="Harshit Namdev"
                                     fill
                                     sizes="(max-width: 768px) 100vw, 400px"
                                     className="object-cover relative z-10"
-                                    // Using unoptimized if the image isn't available right away during build
-                                    onError={(e) => {
-                                        e.currentTarget.style.display = 'none';
-                                    }}
                                 />
                             </div>
                         </div>

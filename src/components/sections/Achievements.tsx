@@ -12,17 +12,17 @@ const ACHIEVEMENTS_DATA = [
     {
         title: "Cybersecurity Club President",
         description: "Led the Cybersecurity Technical Club as President, successfully organizing and managing over 10 state and national-level technical events, workshops, and competitions.",
-        image: "/images/achieve/20240904_212130.png"
+        image: "/images/achieve/president-citac.jpg"
     },
     {
-        title: "Top 5 Finalist - Cyber Safety Hackathon",
+        title: "Top 5 Finalist — Cyber Safety Hackathon",
         description: "Selected as a Top 5 finalist out of numerous participants in the Cyber Safety Hackathon organized by MP State Police, demonstrating advanced problem-solving in cybersecurity.",
-        image: "/images/achieve/news24ddos.png" // Fallback to another image for demo
+        image: "/images/achieve/mp-cyber-cell-hackathon.jpg"
     },
     {
-        title: "College Representative - Shrijan Hackathon",
-        description: "Represented the college at the state-level Shrijan Hackathon, collaborating with peers to develop innovative security solutions.",
-        image: "/images/achieve/20240904_212130.png"
+        title: "News24 DDoS Incident Response",
+        description: "Successfully mitigated a live DDoS attack on News24 production systems, reducing malicious traffic by 94% through Cloudflare WAF rule adjustments and real-time traffic analysis.",
+        image: "/images/achieve/news24ddos.png"
     }
 ];
 
