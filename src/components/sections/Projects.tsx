@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { Github, ExternalLink, Folder } from "lucide-react";
+import { Github, ExternalLink, ShieldCheck, Cloud, Search } from "lucide-react";
 import { SectionHeading } from "../SectionHeading";
 import { useGSAP } from "@/hooks/useGSAP";
 import { gsap } from "gsap";
@@ -30,7 +30,7 @@ const FEATURED_PROJECTS = [
         tech: ["Bash", "Linux", "Traffic Analysis", "IP Filtering"],
         github: "https://github.com/harshit-namdev/storm-bloker-anti-ddos-tool",
         url: "",
-        image: "/images/achieve/news24ddos.png",
+        image: "/images/projects/antiddos-tool.png",
     }
 ];
 
@@ -41,14 +41,15 @@ const OTHER_PROJECTS = [
         tech: ["JavaScript", "APIs", "Security"],
         github: "https://github.com/harshit-namdev",
         url: "",
+        icon: <ShieldCheck size={40} className="text-accent stroke-1" />,
     },
-    // Placeholders for other potential projects
     {
         title: "Cloudflare WAF Automator",
         description: "Scripted automated deployments of WAF rules for rapid DDoS response, filtering bad actors across multiple network scopes.",
         tech: ["Python", "Cloudflare API", "Automation"],
         github: "https://github.com/harshit-namdev",
         url: "",
+        icon: <Cloud size={40} className="text-[#F48120] stroke-1" />,
     },
     {
         title: "DNS Delegation Monitor",
@@ -56,6 +57,7 @@ const OTHER_PROJECTS = [
         tech: ["Bash", "dig", "nslookup", "Networking"],
         github: "https://github.com/harshit-namdev",
         url: "",
+        icon: <Search size={40} className="text-[#7c3aed] stroke-1" />,
     }
 ];
 
@@ -122,6 +124,10 @@ export default function Projects() {
 
     return (
         <section id="projects" ref={sectionRef} className="py-24 md:py-32 relative">
+            {/* Background glow */}
+            <div className="absolute top-20 right-0 w-[400px] h-[400px] bg-[#7c3aed]/5 blur-[120px] rounded-full pointer-events-none" />
+            <div className="absolute bottom-20 left-0 w-[300px] h-[300px] bg-accent/5 blur-[100px] rounded-full pointer-events-none" />
+
             <div className="max-w-6xl mx-auto px-6">
                 <SectionHeading number="03." title="Featured Projects" />
 
@@ -132,15 +138,14 @@ export default function Projects() {
                             <div key={idx} className={`featured-project relative flex flex-col ${isOdd ? 'md:flex-row-reverse' : 'md:flex-row'} gap-8 lg:gap-16 items-center`}>
 
                                 {/* Image Side */}
-                                <div className="project-img-container relative w-full md:w-1/2 h-[300px] sm:h-[400px] rounded-2xl overflow-hidden shadow-2xl group">
-                                    <div className="absolute inset-0 bg-accent/20 z-10 transition-opacity duration-500 group-hover:opacity-0 pointer-events-none" />
-                                    <div className="w-full h-full bg-bg-card relative cursor-pointer" onClick={() => project.url ? window.open(project.url, "_blank") : project.github ? window.open(project.github, "_blank") : null}>
+                                <div className="project-img-container relative w-full md:w-1/2 aspect-video rounded-2xl overflow-hidden shadow-2xl group bg-bg-card border border-border">
+                                    <div className="w-full h-full relative cursor-pointer" onClick={() => project.url ? window.open(project.url, "_blank") : project.github ? window.open(project.github, "_blank") : null}>
                                         <Image
                                             src={project.image}
                                             alt={project.title}
                                             fill
-                                            className="object-cover relative z-0 transition-transform duration-700 ease-out group-hover:scale-110"
-                                            onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                                            className="object-contain transition-transform duration-700 ease-out group-hover:scale-105"
+                                            sizes="(max-width: 768px) 100vw, 50vw"
                                         />
                                     </div>
                                 </div>
@@ -148,10 +153,7 @@ export default function Projects() {
                                 {/* Text Side */}
                                 <div className="relative w-full md:w-1/2 z-20 flex flex-col justify-center">
                                     <p className="text-accent font-mono text-sm uppercase tracking-wider mb-3">Featured Project</p>
-                                    <h3
-                                        className="text-3xl md:text-4xl font-heading font-bold text-text-primary mb-6 hover:text-accent transition-colors cursor-pointer"
-                                        onClick={() => project.url ? window.open(project.url, "_blank") : project.github ? window.open(project.github, "_blank") : null}
-                                    >
+                                    <h3 className="text-3xl md:text-4xl font-heading font-bold text-text-primary mb-6">
                                         {project.title}
                                     </h3>
 
@@ -200,7 +202,7 @@ export default function Projects() {
                                 className="archive-card bg-bg-card border border-border p-8 rounded-2xl flex flex-col h-full group hover:-translate-y-2 hover:border-border-accent hover:shadow-[0_15px_40px_rgba(0,0,0,0.2),_0_0_20px_var(--accent-glow)] transition-all duration-300"
                             >
                                 <div className="flex justify-between items-start mb-6">
-                                    <Folder size={40} className="text-accent stroke-1" />
+                                    {project.icon}
                                     <div className="flex gap-4">
                                         {project.github && (
                                             <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent transition-colors">

@@ -34,13 +34,6 @@ const EXPERIENCE_DATA = [
         description: "Completed a hands-on virtual job simulation in cyber security. Gained practical experience in identifying and responding to security threats, enhancing skills in threat analysis.",
         tech: ["Threat Analysis", "Security Audits"],
     },
-    {
-        date: "2022 — 2026",
-        role: "B.Tech in CSE – Cyber Security",
-        company: "Rajiv Gandhi Proudyogiki Vishwavidyalaya",
-        description: "Focusing on ethical hacking, network protocols, and web security. President of the Cyber Security Technical Club for two terms.",
-        tech: ["Penetration Testing", "TCP/IP"],
-    }
 ];
 
 export default function Experience() {
@@ -88,7 +81,7 @@ export default function Experience() {
     return (
         <section id="experience" ref={sectionRef} className="py-24 md:py-32 relative">
             <div className="max-w-4xl mx-auto px-6">
-                <SectionHeading number="04." title="Experience & Education" />
+                <SectionHeading number="04." title="Experience" />
 
                 <div className="relative mt-20">
                     {/* Central Line */}

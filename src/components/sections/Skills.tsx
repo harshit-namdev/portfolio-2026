@@ -5,9 +5,30 @@ import { motion } from "framer-motion";
 import { SectionHeading } from "../SectionHeading";
 import { useGSAP } from "@/hooks/useGSAP";
 import { gsap } from "gsap";
-// Using lucide-react for some generic icons since we can't easily npm install devicons right now without adding more heavy packages, 
-// though we can use simple colored text or native SVGs for them. We will use simple placeholders for now.
-import { Code2, Server, Wrench, Globe } from "lucide-react";
+import { Globe, Server, Wrench, Shield, Terminal, Code, Database, Wifi, Bug, Lock, Cpu, FileCode } from "lucide-react";
+
+// Map skill names to unique icons
+const SKILL_ICON_MAP: Record<string, React.ReactNode> = {
+    "HTML5": <FileCode className="w-7 h-7" />,
+    "CSS3": <Code className="w-7 h-7" />,
+    "JavaScript": <Terminal className="w-7 h-7" />,
+    "TypeScript": <FileCode className="w-7 h-7" />,
+    "React": <Cpu className="w-7 h-7" />,
+    "Next.js": <Globe className="w-7 h-7" />,
+    "Tailwind CSS": <Code className="w-7 h-7" />,
+    "Node.js": <Server className="w-7 h-7" />,
+    "Express": <Server className="w-7 h-7" />,
+    "Python": <Terminal className="w-7 h-7" />,
+    "Flask": <Database className="w-7 h-7" />,
+    "Django": <Database className="w-7 h-7" />,
+    "C++": <Cpu className="w-7 h-7" />,
+    "Git & GitHub": <Code className="w-7 h-7" />,
+    "AWS Basics": <Globe className="w-7 h-7" />,
+    "Kali Linux": <Shield className="w-7 h-7" />,
+    "Wireshark": <Wifi className="w-7 h-7" />,
+    "Burp Suite": <Bug className="w-7 h-7" />,
+    "Cloudflare WAF": <Lock className="w-7 h-7" />,
+};
 
 const SKILL_CATEGORIES = [
     {
@@ -21,7 +42,7 @@ const SKILL_CATEGORIES = [
         skills: ["Node.js", "Express", "Python", "Flask", "Django", "C++"],
     },
     {
-        title: "Tools & Others",
+        title: "Tools & Security",
         icon: <Wrench className="w-5 h-5" />,
         skills: ["Git & GitHub", "AWS Basics", "Kali Linux", "Wireshark", "Burp Suite", "Cloudflare WAF"],
     },
@@ -34,48 +55,27 @@ export default function Skills() {
     const marqueeRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
-        // Reveal categories
         const categories: HTMLElement[] = gsap.utils.toArray(".skill-category");
         categories.forEach((cat) => {
-            gsap.fromTo(
-                cat,
+            gsap.fromTo(cat,
                 { y: 60, opacity: 0 },
-                {
-                    y: 0,
-                    opacity: 1,
-                    duration: 0.8,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: cat,
-                        start: "top 85%",
-                    },
-                }
+                { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", scrollTrigger: { trigger: cat, start: "top 85%" } }
             );
         });
 
-        // Reveal skill cards with stagger
         const cards = gsap.utils.toArray(".skill-card");
-        gsap.fromTo(
-            cards,
+        gsap.fromTo(cards,
             { y: 60, opacity: 0, rotateX: 8 },
-            {
-                y: 0,
-                opacity: 1,
-                rotateX: 0,
-                duration: 0.8,
-                stagger: 0.08,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 75%",
-                },
-            }
+            { y: 0, opacity: 1, rotateX: 0, duration: 0.8, stagger: 0.08, ease: "power3.out", scrollTrigger: { trigger: sectionRef.current, start: "top 75%" } }
         );
-
     }, { scope: sectionRef });
 
     return (
         <section id="skills" ref={sectionRef} className="py-24 md:py-32 relative overflow-hidden">
+            {/* Background glows */}
+            <div className="absolute top-20 left-0 w-[400px] h-[400px] bg-accent/5 blur-[120px] rounded-full pointer-events-none" />
+            <div className="absolute bottom-20 right-0 w-[300px] h-[300px] bg-[#7c3aed]/5 blur-[100px] rounded-full pointer-events-none" />
+
             <div className="max-w-6xl mx-auto px-6 mb-20">
                 <SectionHeading number="02." title="Skills & Technologies" />
 
@@ -94,9 +94,11 @@ export default function Skills() {
                                         key={sIdx}
                                         whileHover={{ scale: 1.05, y: -5 }}
                                         whileTap={{ scale: 0.95 }}
-                                        className="skill-card flex flex-col items-center justify-center p-4 h-[100px] bg-bg-card border border-border rounded-2xl group transition-colors duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] hover:border-accent/50 hover:shadow-[0_10px_30px_rgba(100,255,218,0.15)] cursor-pointer"
+                                        className="skill-card flex flex-col items-center justify-center p-4 h-[100px] bg-bg-card border border-border rounded-2xl group transition-colors duration-300 hover:border-accent/50 hover:shadow-[0_10px_30px_rgba(100,255,218,0.15)] cursor-pointer"
                                     >
-                                        <Code2 className="w-8 h-8 text-text-muted mb-2 group-hover:text-accent transition-colors duration-300" />
+                                        <span className="text-text-muted mb-2 group-hover:text-accent transition-colors duration-300">
+                                            {SKILL_ICON_MAP[skill] || <Code className="w-7 h-7" />}
+                                        </span>
                                         <span className="text-xs text-text-secondary font-medium text-center">
                                             {skill}
                                         </span>
@@ -106,34 +108,10 @@ export default function Skills() {
                         </div>
                     ))}
                 </div>
-
-                {/* 3D Rotating Skills Cylinder */}
-                <div className="flex justify-center items-center py-16 overflow-hidden">
-                    <div className="relative h-[80px]" style={{ perspective: '500px' }}>
-                        <div className="cylinder-box relative" style={{ width: '300px', height: '80px' }}>
-                            {["HACK", "BUILD", "DEFEND", "HACK", "BUILD", "DEFEND", "HACK", "BUILD", "DEFEND", "HACK", "BUILD", "DEFEND", "HACK", "BUILD", "DEFEND", "HACK"].map((word, i) => (
-                                <span
-                                    key={i}
-                                    className="cylinder-span text-2xl md:text-4xl"
-                                    style={{
-                                        transform: `translate(-50%, -50%) rotateX(${i * 22.5}deg) translateZ(109px)`,
-                                        left: '50%',
-                                        top: '50%',
-                                    }}
-                                >
-                                    <i style={{ color: '#5c5fc4', fontStyle: 'normal' }}>{word === "HACK" ? word : ""}</i>
-                                    {word === "BUILD" ? word : ""}
-                                    <i style={{ color: '#64ffda', fontStyle: 'normal' }}>{word === "DEFEND" ? word : ""}</i>
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-                </div>
             </div>
 
             {/* Infinite Marquee Strip */}
             <div className="w-full relative py-6 bg-bg-card border-y border-border overflow-hidden flex whitespace-nowrap">
-                {/* Creating two exact copies that animate to the left */}
                 <div ref={marqueeRef} className="flex whitespace-nowrap animate-marquee">
                     {[...ALL_SKILLS, ...ALL_SKILLS, ...ALL_SKILLS].map((skill, idx) => (
                         <div key={idx} className="flex items-center mx-8">

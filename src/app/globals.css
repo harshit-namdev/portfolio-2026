@@ -33,6 +33,21 @@
   body {
     @apply bg-[var(--bg-primary)] text-text-secondary antialiased overflow-x-hidden;
     font-family: var(--font-inter), sans-serif;
+    position: relative;
+  }
+
+  /* Subtle ambient color blobs across entire site */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 600px 600px at 10% 20%, rgba(100, 255, 218, 0.03), transparent),
+      radial-gradient(ellipse 500px 500px at 85% 60%, rgba(124, 58, 237, 0.03), transparent),
+      radial-gradient(ellipse 400px 400px at 50% 80%, rgba(59, 130, 246, 0.02), transparent),
+      radial-gradient(ellipse 300px 300px at 70% 10%, rgba(255, 0, 255, 0.015), transparent);
   }
 
   h1,

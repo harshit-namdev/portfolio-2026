@@ -49,6 +49,8 @@ export default function About() {
 
     return (
         <section id="about" ref={sectionRef} className="py-24 md:py-32 relative">
+            {/* Background glow */}
+            <div className="absolute top-1/3 right-0 w-[400px] h-[400px] bg-accent/5 blur-[120px] rounded-full pointer-events-none" />
             <div className="max-w-6xl mx-auto px-6">
                 <SectionHeading number="01." title="About Me" />
 
@@ -57,17 +59,17 @@ export default function About() {
                     <div className="flex-1 space-y-6 text-text-secondary text-lg leading-relaxed max-w-2xl">
                         <AnimatedText
                             type="lines"
-                            text="Hello! My name is Harshit and I enjoy resolving complex security puzzles and fortifying systems against exploits. My interest in cybersecurity started back in high school when I first decided to explore how digital infrastructures defend against network threats."
+                            text="Cybersecurity professional specializing in penetration testing, web security, and ethical hacking. I combine advanced technical knowledge with hands-on expertise to identify vulnerabilities and strengthen digital infrastructures against evolving threats."
                         />
                         <AnimatedText
                             type="lines"
                             delay={0.1}
-                            text="Fast-forward to today, and I'm currently pursuing my B.Tech in CSE Cyber Security. I've had the privilege of serving as the President of the Cybersecurity Technical Club, organizing multiple state-level events, and working hands-on as a Web Security Support engineer mitigating live DDoS attacks."
+                            text="President of the Cybersecurity Technical Club — led and organized 10+ state and national-level technical events, demonstrating strong leadership and a commitment to excellence. I implement proactive security measures and continuously expand my expertise in the rapidly evolving cybersecurity landscape."
                         />
                         <AnimatedText
                             type="lines"
                             delay={0.2}
-                            text="My main focus these days is expanding my knowledge in penetration testing and discovering vulnerabilities in enterprise environments, all while building tools to automate network analysis and threat detection. I'm always open to discussing new security challenges."
+                            text="Open to internships, contract roles, part-time positions, and freelance opportunities in cybersecurity. Ready to collaborate on challenging projects, apply advanced skills, and drive professional growth in dynamic environments."
                         />
 
                         <div className="pt-4">
