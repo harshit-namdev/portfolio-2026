@@ -1,49 +1,9 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { gsap } from "gsap";
-
 export default function HeroName() {
-    const containerRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        // Animate dash letters (draw stroke)
-        gsap.to(".hero-dash-path", {
-            strokeDashoffset: 0,
-            duration: 1.5,
-            ease: "power2.inOut",
-            stagger: 0.15,
-            delay: 0.3,
-        });
-
-        // Animate spin letter - rotate continuously then stop
-        const spinTl = gsap.timeline({ repeat: 2, repeatDelay: 1, delay: 0.5 });
-        spinTl.to(".hero-spin-path", {
-            rotation: 360,
-            transformOrigin: "50% 50%",
-            duration: 0.8,
-            ease: "power1.inOut",
-        }).to(".hero-spin-path", {
-            rotation: 0,
-            duration: 0.4,
-            ease: "back.out(2)",
-        });
-
-        // Float effect on all letters
-        gsap.to(".hero-name-letter", {
-            y: -6,
-            duration: 2,
-            ease: "sine.inOut",
-            repeat: -1,
-            yoyo: true,
-            stagger: 0.1,
-            delay: 2,
-        });
-    }, []);
-
     return (
-        <div ref={containerRef} className="flex flex-wrap gap-0 items-center mb-4">
-            {/* Hidden SVG defs - must be outside viewBox-less SVGs */}
+        <div className="flex flex-wrap gap-0 items-center mb-4">
+            {/* Gradient defs */}
             <svg height="0" width="0" viewBox="0 0 64 64" className="absolute pointer-events-none">
                 <defs>
                     <linearGradient id="hn-gradient1" x1="0" y1="62" x2="0" y2="2" gradientUnits="userSpaceOnUse">
@@ -70,88 +30,97 @@ export default function HeroName() {
             </svg>
 
             {/* H */}
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="w-10 h-10 md:w-14 md:h-14 hero-name-letter">
-                <path
-                    strokeLinejoin="round" strokeLinecap="round" strokeWidth="8"
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="w-10 h-10 md:w-16 md:h-16 hero-name-letter">
+                <path strokeLinejoin="round" strokeLinecap="round" strokeWidth="8"
                     stroke="url(#hn-gradient1)" fill="none"
                     d="M16 12 L16 52 M48 12 L48 52 M16 32 L48 32"
-                    className="hero-dash-path"
-                    pathLength="360"
-                    style={{ strokeDasharray: 360, strokeDashoffset: 360 }}
-                />
+                    className="hn-dash" pathLength="360" />
             </svg>
 
             {/* A */}
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="w-10 h-10 md:w-14 md:h-14 hero-name-letter">
-                <path
-                    strokeLinejoin="round" strokeLinecap="round" strokeWidth="8"
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="w-10 h-10 md:w-16 md:h-16 hero-name-letter">
+                <path strokeLinejoin="round" strokeLinecap="round" strokeWidth="8"
                     stroke="url(#hn-gradient2)" fill="none"
                     d="M32 12 L12 52 L20 52 L28 36 L36 36 L44 52 L52 52 Z M24 40 L40 40"
-                    className="hero-spin-path"
-                    pathLength="360"
-                />
+                    className="hn-spin" pathLength="360" />
             </svg>
 
             {/* R */}
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="w-10 h-10 md:w-14 md:h-14 hero-name-letter">
-                <path
-                    strokeLinejoin="round" strokeLinecap="round" strokeWidth="8"
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="w-10 h-10 md:w-16 md:h-16 hero-name-letter">
+                <path strokeLinejoin="round" strokeLinecap="round" strokeWidth="8"
                     stroke="url(#hn-gradient3)" fill="none"
                     d="M16 12 L16 52 M16 12 L40 12 C48 12 48 32 40 32 L16 32 M40 32 L52 52"
-                    className="hero-dash-path"
-                    pathLength="360"
-                    style={{ strokeDasharray: 360, strokeDashoffset: 360 }}
-                />
+                    className="hn-dash" pathLength="360" />
             </svg>
 
             {/* S */}
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="w-10 h-10 md:w-14 md:h-14 hero-name-letter">
-                <path
-                    strokeLinejoin="round" strokeLinecap="round" strokeWidth="8"
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="w-10 h-10 md:w-16 md:h-16 hero-name-letter">
+                <path strokeLinejoin="round" strokeLinecap="round" strokeWidth="8"
                     stroke="url(#hn-gradient1)" fill="none"
                     d="M48 16 C48 8 40 8 32 8 C24 8 16 8 16 16 C16 24 24 28 32 32 C40 36 48 40 48 48 C48 56 40 56 32 56 C24 56 16 56 16 48"
-                    className="hero-dash-path"
-                    pathLength="360"
-                    style={{ strokeDasharray: 360, strokeDashoffset: 360 }}
-                />
+                    className="hn-dash" pathLength="360" />
             </svg>
 
             {/* H */}
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="w-10 h-10 md:w-14 md:h-14 hero-name-letter">
-                <path
-                    strokeLinejoin="round" strokeLinecap="round" strokeWidth="8"
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="w-10 h-10 md:w-16 md:h-16 hero-name-letter">
+                <path strokeLinejoin="round" strokeLinecap="round" strokeWidth="8"
                     stroke="url(#hn-gradient2)" fill="none"
                     d="M16 12 L16 52 M48 12 L48 52 M16 32 L48 32"
-                    className="hero-spin-path"
-                    pathLength="360"
-                />
+                    className="hn-spin" pathLength="360" />
             </svg>
 
             {/* I */}
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="w-10 h-10 md:w-14 md:h-14 hero-name-letter">
-                <path
-                    strokeLinejoin="round" strokeLinecap="round" strokeWidth="8"
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="w-10 h-10 md:w-16 md:h-16 hero-name-letter">
+                <path strokeLinejoin="round" strokeLinecap="round" strokeWidth="8"
                     stroke="url(#hn-gradient3)" fill="none"
                     d="M32 12 L32 52 M20 12 L44 12 M20 52 L44 52"
-                    className="hero-dash-path"
-                    pathLength="360"
-                    style={{ strokeDasharray: 360, strokeDashoffset: 360 }}
-                />
+                    className="hn-dash" pathLength="360" />
             </svg>
 
             {/* T */}
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="w-10 h-10 md:w-14 md:h-14 hero-name-letter">
-                <path
-                    strokeLinejoin="round" strokeLinecap="round" strokeWidth="8"
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="w-10 h-10 md:w-16 md:h-16 hero-name-letter">
+                <path strokeLinejoin="round" strokeLinecap="round" strokeWidth="8"
                     stroke="url(#hn-gradient1)" fill="none"
                     d="M16 12 L48 12 M32 12 L32 52"
-                    className="hero-dash-path"
-                    pathLength="360"
-                    style={{ strokeDasharray: 360, strokeDashoffset: 360 }}
-                />
+                    className="hn-dash" pathLength="360" />
             </svg>
 
             <span className="sr-only">HARSHIT</span>
+
+            <style>{`
+                .hn-dash {
+                    stroke-dasharray: 360;
+                    stroke-dashoffset: 360;
+                    animation: hnDash 2.5s ease-in-out forwards, hnFloat 3s ease-in-out 2.5s infinite alternate;
+                }
+                .hn-spin {
+                    stroke-dasharray: 360;
+                    stroke-dashoffset: 0;
+                    animation: hnSpin 6s ease-in-out infinite, hnFloat 3s ease-in-out 2.5s infinite alternate;
+                }
+                .hero-name-letter:nth-child(2) .hn-dash { animation-delay: 0.1s, 2.6s; }
+                .hero-name-letter:nth-child(3) .hn-dash { animation-delay: 0.2s, 2.7s; }
+                .hero-name-letter:nth-child(4) .hn-dash { animation-delay: 0.15s, 2.65s; }
+                .hero-name-letter:nth-child(5) .hn-dash { animation-delay: 0.3s, 2.8s; }
+                .hero-name-letter:nth-child(6) .hn-spin { animation-delay: 0s, 2.5s; }
+                .hero-name-letter:nth-child(7) .hn-dash { animation-delay: 0.4s, 2.9s; }
+                .hero-name-letter:nth-child(8) .hn-dash { animation-delay: 0.5s, 3.0s; }
+
+                @keyframes hnDash {
+                    0% { stroke-dashoffset: 360; }
+                    100% { stroke-dashoffset: 0; }
+                }
+                @keyframes hnSpin {
+                    0%, 100% { transform: rotate(0deg); }
+                    25% { transform: rotate(90deg); }
+                    50% { transform: rotate(180deg); }
+                    75% { transform: rotate(270deg); }
+                }
+                @keyframes hnFloat {
+                    0% { transform: translateY(0); }
+                    100% { transform: translateY(-6px); }
+                }
+            `}</style>
         </div>
     );
 }

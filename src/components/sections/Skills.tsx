@@ -106,6 +106,29 @@ export default function Skills() {
                         </div>
                     ))}
                 </div>
+
+                {/* 3D Rotating Skills Cylinder */}
+                <div className="flex justify-center items-center py-16 overflow-hidden">
+                    <div className="relative h-[80px]" style={{ perspective: '500px' }}>
+                        <div className="cylinder-box relative" style={{ width: '300px', height: '80px' }}>
+                            {["HACK", "BUILD", "DEFEND", "HACK", "BUILD", "DEFEND", "HACK", "BUILD", "DEFEND", "HACK", "BUILD", "DEFEND", "HACK", "BUILD", "DEFEND", "HACK"].map((word, i) => (
+                                <span
+                                    key={i}
+                                    className="cylinder-span text-2xl md:text-4xl"
+                                    style={{
+                                        transform: `translate(-50%, -50%) rotateX(${i * 22.5}deg) translateZ(109px)`,
+                                        left: '50%',
+                                        top: '50%',
+                                    }}
+                                >
+                                    <i style={{ color: '#5c5fc4', fontStyle: 'normal' }}>{word === "HACK" ? word : ""}</i>
+                                    {word === "BUILD" ? word : ""}
+                                    <i style={{ color: '#64ffda', fontStyle: 'normal' }}>{word === "DEFEND" ? word : ""}</i>
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                </div>
             </div>
 
             {/* Infinite Marquee Strip */}

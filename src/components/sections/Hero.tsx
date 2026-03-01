@@ -99,17 +99,13 @@ export default function Hero() {
             id="home"
             className="relative min-h-screen flex items-center pt-20 overflow-hidden"
         >
-            {/* Background Orbs */}
-            <motion.div
-                animate={{ y: [0, -30, 0], x: [0, 20, 0] }}
-                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-[10%] right-[10%] w-[400px] h-[400px] bg-accent/5 blur-[150px] rounded-full pointer-events-none"
-            />
-            <motion.div
-                animate={{ y: [0, 40, 0], x: [0, -30, 0] }}
-                transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute bottom-[20%] left-[5%] w-[300px] h-[300px] bg-[#7c3aed]/5 blur-[120px] rounded-full pointer-events-none"
-            />
+            {/* Aurora Background */}
+            <div className="aurora">
+                <div className="aurora__item" />
+                <div className="aurora__item" />
+                <div className="aurora__item" />
+                <div className="aurora__item" />
+            </div>
 
             <div className="max-w-6xl w-full mx-auto px-6 relative z-10">
                 <div className="max-w-3xl">
@@ -118,13 +114,21 @@ export default function Hero() {
                     </p>
 
                     <HeroName />
-                    <h1
-                        ref={nameRef}
-                        className="text-[clamp(2.5rem,6vw,5rem)] font-heading font-extrabold leading-[1.1] mb-2 text-transparent bg-clip-text bg-gradient-to-r from-accent to-[#7c3aed] mt-2"
-                        style={{ paddingBottom: '0.2em', marginBottom: '-0.2em' }} // Prevent clipping of gradient text
-                    >
-                        NAMDEV
-                    </h1>
+                    {/* SVG Stroke Animated NAMDEV */}
+                    <div ref={nameRef} className="mt-2 mb-2">
+                        <svg viewBox="0 0 500 80" className="w-full max-w-[400px] h-auto">
+                            <symbol id="s-namdev">
+                                <text textAnchor="start" x="0" y="70" className="font-heading font-extrabold" style={{ fontSize: '72px' }}>NAMDEV</text>
+                            </symbol>
+                            <g>
+                                <use xlinkHref="#s-namdev" className="svg-stroke-text" />
+                                <use xlinkHref="#s-namdev" className="svg-stroke-text" />
+                                <use xlinkHref="#s-namdev" className="svg-stroke-text" />
+                                <use xlinkHref="#s-namdev" className="svg-stroke-text" />
+                                <use xlinkHref="#s-namdev" className="svg-stroke-text" />
+                            </g>
+                        </svg>
+                    </div>
 
                     <div className="hero-role h-10 md:h-12 mb-6 opacity-0">
                         <h2 className="text-xl md:text-3xl font-medium text-text-secondary">
