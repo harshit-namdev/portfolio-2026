@@ -90,7 +90,7 @@ export default function Contact() {
                             </a>
                         </MagneticButton>
                         <MagneticButton>
-                            <a href="/resume/gen web/Harshit Namdev Resume.pdf" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-center gap-2 border border-accent text-accent px-10 py-4 rounded-full font-semibold hover:bg-accent-subtle transition-all duration-300">
+                            <a href="/resume/soc gen/Harshit Namdev Resume.pdf" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-center gap-2 border border-accent text-accent px-10 py-4 rounded-full font-semibold hover:bg-accent-subtle transition-all duration-300">
                                 <Download size={18} /> Download Resume
                             </a>
                         </MagneticButton>
