@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { Github, ExternalLink, ShieldCheck, Cloud, Search } from "lucide-react";
+import { Github, ExternalLink, ShieldCheck, Cloud, Search, Shield, FlaskConical, Zap, Radar } from "lucide-react";
 import { SectionHeading } from "../SectionHeading";
 import { useGSAP } from "@/hooks/useGSAP";
 import { gsap } from "gsap";
@@ -12,17 +12,23 @@ const FEATURED_PROJECTS = [
         title: "StagnoLab",
         description: "Developing a secure data-hiding platform for images, docs, and pdf files. Features include drag & drop interface, password-protected encryption, and retrieval validation. Includes history tracking and advanced analysis for tamper detection.",
         tech: ["Flask", "Python", "Cryptography", "Steganography"],
-        github: "https://github.com/harshit-namdev",
-        url: "https://harshitnamdev.netlify.app/",
+        github: "https://github.com/harshit-namdev/StagnoLab",
+        url: "https://stagno-lab.vercel.app",
         image: "/images/projects/stagno-lab-project.png",
+        icon: <FlaskConical className="w-6 h-6" />,
+        iconBg: "bg-[#7c3aed]/20",
+        iconColor: "text-[#7c3aed]",
     },
     {
         title: "VulScan: Vulnerability & Network Scanner",
-        description: "An application enabling users to identify security vulnerabilities, discover network hosts, and generate comprehensive reports. Scanned 50 systems in a classroom test, identifying vulnerabilities on 48 machines to support targeted patching.",
-        tech: ["Python", "PyQt5", "Nmap", "Network Security"],
+        description: "An application that enables users to identify security vulnerabilities, discover network hosts, and generate comprehensive reports about potential security issues. Scanned 50 systems in a classroom test; vulnerabilities identified on 48 machines with varied severity. Output included categorized reports for targeted patching.",
+        tech: ["Python", "Nmap", "Network Security", "Vulnerability Assessment"],
         github: "https://github.com/harshit-namdev",
         url: "",
         image: "/images/projects/vulscan-project.jpg",
+        icon: <Radar className="w-6 h-6" />,
+        iconBg: "bg-[#F48120]/20",
+        iconColor: "text-[#F48120]",
     },
     {
         title: "Anti-DDoS Tool for Websites",
@@ -31,6 +37,9 @@ const FEATURED_PROJECTS = [
         github: "https://github.com/harshit-namdev/storm-bloker-anti-ddos-tool",
         url: "",
         image: "/images/projects/antiddos-tool.png",
+        icon: <Shield className="w-6 h-6" />,
+        iconBg: "bg-accent/20",
+        iconColor: "text-accent",
     }
 ];
 
@@ -41,7 +50,7 @@ const OTHER_PROJECTS = [
         tech: ["JavaScript", "APIs", "Security"],
         github: "https://github.com/harshit-namdev",
         url: "",
-        icon: <ShieldCheck size={40} className="text-accent stroke-1" />,
+        icon: <ShieldCheck size={36} className="text-accent stroke-1" />,
     },
     {
         title: "Cloudflare WAF Automator",
@@ -49,7 +58,7 @@ const OTHER_PROJECTS = [
         tech: ["Python", "Cloudflare API", "Automation"],
         github: "https://github.com/harshit-namdev",
         url: "",
-        icon: <Cloud size={40} className="text-[#F48120] stroke-1" />,
+        icon: <Cloud size={36} className="text-[#F48120] stroke-1" />,
     },
     {
         title: "DNS Delegation Monitor",
@@ -57,7 +66,7 @@ const OTHER_PROJECTS = [
         tech: ["Bash", "dig", "nslookup", "Networking"],
         github: "https://github.com/harshit-namdev",
         url: "",
-        icon: <Search size={40} className="text-[#7c3aed] stroke-1" />,
+        icon: <Search size={36} className="text-[#7c3aed] stroke-1" />,
     }
 ];
 
@@ -65,45 +74,24 @@ export default function Projects() {
     const sectionRef = useRef<HTMLElement>(null);
 
     useGSAP(() => {
-        // Reveal Featured Projects
-        const featuredBlocks: HTMLElement[] = gsap.utils.toArray(".featured-project");
-        featuredBlocks.forEach((block, i) => {
-            const isOdd = i % 2 !== 0; // Check order for alternating entrance directions
+        const cards: HTMLElement[] = gsap.utils.toArray(".project-card");
+        cards.forEach((card) => {
             gsap.fromTo(
-                block,
-                { y: 100, opacity: 0 },
+                card,
+                { y: 60, opacity: 0 },
                 {
                     y: 0,
                     opacity: 1,
-                    duration: 1,
+                    duration: 0.8,
                     ease: "power3.out",
                     scrollTrigger: {
-                        trigger: block,
-                        start: "top 80%",
+                        trigger: card,
+                        start: "top 85%",
                     },
                 }
             );
-
-            const imgContainer = block.querySelector(".project-img-container");
-            if (imgContainer) {
-                gsap.fromTo(
-                    imgContainer,
-                    { x: isOdd ? 50 : -50, scale: 0.95 },
-                    {
-                        x: 0,
-                        scale: 1,
-                        duration: 1.2,
-                        ease: "power3.out",
-                        scrollTrigger: {
-                            trigger: block,
-                            start: "top 80%",
-                        },
-                    }
-                );
-            }
         });
 
-        // Reveal Archive Cards
         const archiveCards = gsap.utils.toArray(".archive-card");
         gsap.fromTo(
             archiveCards,
@@ -113,10 +101,10 @@ export default function Projects() {
                 opacity: 1,
                 duration: 0.6,
                 stagger: 0.1,
-                ease: "power2.out",
+                ease: "power3.out",
                 scrollTrigger: {
                     trigger: ".archive-grid",
-                    start: "top 85%",
+                    start: "top 80%",
                 },
             }
         );
@@ -131,59 +119,66 @@ export default function Projects() {
             <div className="max-w-6xl mx-auto px-6">
                 <SectionHeading number="03." title="Featured Projects" />
 
-                <div className="mt-16 space-y-16 md:space-y-32">
-                    {FEATURED_PROJECTS.map((project, idx) => {
-                        const isOdd = idx % 2 !== 0;
-                        return (
-                            <div key={idx} className={`featured-project relative flex flex-col ${isOdd ? 'md:flex-row-reverse' : 'md:flex-row'} gap-8 lg:gap-16 items-center`}>
-
-                                {/* Image Side */}
-                                <div className="project-img-container relative w-full md:w-1/2 aspect-video rounded-2xl overflow-hidden shadow-2xl group bg-bg-card border border-border">
-                                    <div className="w-full h-full relative cursor-pointer" onClick={() => project.url ? window.open(project.url, "_blank") : project.github ? window.open(project.github, "_blank") : null}>
-                                        <Image
-                                            src={project.image}
-                                            alt={project.title}
-                                            fill
-                                            className="object-contain transition-transform duration-700 ease-out group-hover:scale-105"
-                                            sizes="(max-width: 768px) 100vw, 50vw"
-                                        />
-                                    </div>
-                                </div>
-
-                                {/* Text Side */}
-                                <div className="relative w-full md:w-1/2 z-20 flex flex-col justify-center">
-                                    <p className="text-accent font-mono text-sm uppercase tracking-wider mb-3">Featured Project</p>
-                                    <h3 className="text-3xl md:text-4xl font-heading font-bold text-text-primary mb-6">
-                                        {project.title}
-                                    </h3>
-
-                                    <div className="bg-bg-card/80 backdrop-blur-sm border border-border p-6 md:p-8 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] mb-8 hover:border-accent/50 transition-colors duration-300 relative z-30">
-                                        <p className="text-text-secondary text-base md:text-lg leading-relaxed">
-                                            {project.description}
-                                        </p>
-                                    </div>
-
-                                    <ul className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-sm text-text-muted mb-8 relative z-30">
-                                        {project.tech.map((t, i) => <li key={i}>{t}</li>)}
-                                    </ul>
-
-                                    <div className="flex items-center gap-6 relative z-30">
-                                        {project.github && (
-                                            <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent transition-transform hover:scale-110" aria-label="GitHub Link">
-                                                <Github size={24} />
-                                            </a>
-                                        )}
-                                        {project.url && (
-                                            <a href={project.url} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent transition-transform hover:scale-110" aria-label="External Link">
-                                                <ExternalLink size={24} />
-                                            </a>
-                                        )}
-                                    </div>
-                                </div>
-
+                {/* Featured Project Cards */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-16">
+                    {FEATURED_PROJECTS.map((project, idx) => (
+                        <div
+                            key={idx}
+                            className="project-card bg-bg-card border border-border rounded-2xl overflow-hidden group hover:-translate-y-2 hover:border-accent/30 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3),_0_0_30px_var(--accent-glow)] transition-all duration-400"
+                        >
+                            {/* Image */}
+                            <div className="relative aspect-video w-full overflow-hidden bg-bg-primary">
+                                <Image
+                                    src={project.image}
+                                    alt={project.title}
+                                    fill
+                                    className="object-contain group-hover:scale-105 transition-transform duration-700"
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                />
                             </div>
-                        );
-                    })}
+
+                            {/* Content */}
+                            <div className="p-6 md:p-8">
+                                {/* Header with icon */}
+                                <div className="flex items-start gap-4 mb-4">
+                                    <div className={`w-11 h-11 rounded-xl ${project.iconBg} flex items-center justify-center shrink-0 ${project.iconColor}`}>
+                                        {project.icon}
+                                    </div>
+                                    <div>
+                                        <p className="text-accent font-mono text-xs uppercase tracking-wider mb-1">Featured Project</p>
+                                        <h3 className="text-xl md:text-2xl font-heading font-bold text-text-primary">{project.title}</h3>
+                                    </div>
+                                </div>
+
+                                <p className="text-text-secondary text-sm leading-relaxed mb-5">
+                                    {project.description}
+                                </p>
+
+                                {/* Tech tags */}
+                                <div className="flex flex-wrap gap-2 mb-6">
+                                    {project.tech.map((t, i) => (
+                                        <span key={i} className="px-3 py-1 rounded-full bg-bg-primary border border-border text-text-dim text-xs font-mono group-hover:text-text-secondary group-hover:border-accent/20 transition-colors">
+                                            {t}
+                                        </span>
+                                    ))}
+                                </div>
+
+                                {/* Links */}
+                                <div className="flex items-center gap-4">
+                                    {project.github && (
+                                        <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-text-muted hover:text-accent transition-colors text-sm">
+                                            <Github size={18} /> Code
+                                        </a>
+                                    )}
+                                    {project.url && (
+                                        <a href={project.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-text-muted hover:text-accent transition-colors text-sm">
+                                            <ExternalLink size={18} /> Live Demo
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
 
                 {/* Other Projects */}
@@ -218,9 +213,7 @@ export default function Projects() {
                                 </div>
 
                                 <h4 className="text-xl font-bold text-text-primary mb-3 group-hover:text-accent transition-colors">
-                                    <a href={project.url || project.github} target="_blank" rel="noopener noreferrer" className="relative inset-0 inline-block focus:outline-none focus:ring-2 focus:ring-accent rounded">
-                                        {project.title}
-                                    </a>
+                                    {project.title}
                                 </h4>
 
                                 <p className="text-text-secondary text-sm mb-6 flex-grow leading-relaxed">

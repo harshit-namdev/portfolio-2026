@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useId } from "react";
 import { useGSAP } from "@/hooks/useGSAP";
 import { gsap } from "gsap";
 
@@ -15,8 +15,11 @@ export function SectionHeading({
     const titleRef = useRef<HTMLHeadingElement>(null);
     const numberRef = useRef<HTMLSpanElement>(null);
     const lineRef = useRef<HTMLDivElement>(null);
+    const uniqueId = useId();
 
     useGSAP(() => {
+        if (!containerRef.current) return;
+
         // Number slides in from left
         gsap.fromTo(numberRef.current,
             { x: -30, opacity: 0 },
@@ -26,19 +29,17 @@ export function SectionHeading({
             }
         );
 
-        // Title letters reveal with stagger
-        if (titleRef.current) {
-            const spans = titleRef.current.querySelectorAll(".heading-char");
-            if (spans.length > 0) {
-                gsap.fromTo(spans,
-                    { opacity: 0, y: 40, rotateX: 90 },
-                    {
-                        opacity: 1, y: 0, rotateX: 0,
-                        duration: 0.5, ease: "back.out(1.5)", stagger: 0.03,
-                        scrollTrigger: { trigger: containerRef.current, start: "top 85%" },
-                    }
-                );
-            }
+        // Title letters reveal with stagger — scoped to THIS container only
+        const spans = containerRef.current.querySelectorAll("[data-hchar]");
+        if (spans.length > 0) {
+            gsap.fromTo(spans,
+                { opacity: 0, y: 40, rotateX: 90 },
+                {
+                    opacity: 1, y: 0, rotateX: 0,
+                    duration: 0.5, ease: "back.out(1.5)", stagger: 0.03,
+                    scrollTrigger: { trigger: containerRef.current, start: "top 85%" },
+                }
+            );
         }
 
         // Line grows from left
@@ -55,7 +56,8 @@ export function SectionHeading({
     const chars = title.split("").map((char, i) => (
         <span
             key={i}
-            className="heading-char inline-block"
+            data-hchar
+            className="inline-block"
             style={{ opacity: 0, transform: "translateY(40px) rotateX(90deg)" }}
         >
             {char === " " ? "\u00A0" : char}

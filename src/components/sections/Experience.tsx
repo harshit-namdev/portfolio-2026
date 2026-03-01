@@ -4,34 +4,64 @@ import { useRef } from "react";
 import { useGSAP } from "@/hooks/useGSAP";
 import { gsap } from "gsap";
 import { SectionHeading } from "../SectionHeading";
+import { Newspaper, Building2, Globe, Award } from "lucide-react";
 
 const EXPERIENCE_DATA = [
     {
         date: "Mar 2025 — Apr 2025",
         role: "IT/Infrastructure Support & Web Security Support",
         company: "Daily News 24",
-        description: "Assisted in diagnosing performance degradation and service interruptions on production websites during DDoS incidents. Updated Cloudflare configurations (WAF rules & filters) to block malicious patterns (reduced by 94%) and stabilize uptime. Used Wireshark/log checks to isolate anomalies.",
+        icon: <Newspaper className="w-6 h-6" />,
+        iconBg: "bg-[#7c3aed]/20",
+        iconColor: "text-[#7c3aed]",
+        description: "Responded to an active DDoS attack and implemented 86 custom firewall rules via Cloudflare to mitigate the threat and protect the platform.",
+        highlights: [
+            "Improved incident response and hardened overall server configuration",
+            "Successfully prevented further attacks and improved platform resilience",
+            "Implemented comprehensive security measures for ongoing protection",
+        ],
         tech: ["Wireshark", "Cloudflare WAF", "Incident Response"],
     },
     {
         date: "Dec 2025",
         role: "Technical & Security Operations Support",
         company: "Confidential Government Project",
-        description: "Investigated email routing issue by validating DNS delegation and MX record paths. Corrected nameserver entries and validated service recovery. Created RCA summary and configuration notes to avoid recurrence and improve reliability.",
+        icon: <Building2 className="w-6 h-6" />,
+        iconBg: "bg-accent/20",
+        iconColor: "text-accent",
+        description: "Investigated email routing issue by validating DNS delegation and MX record paths.",
+        highlights: [
+            "Corrected nameserver entries and validated service recovery",
+            "Created RCA summary and configuration notes to avoid recurrence",
+        ],
         tech: ["DNS Records", "nslookup", "dig", "WHOIS"],
     },
     {
         date: "2024",
         role: "Web Developer Intern",
         company: "HMJ Fire Safety Services",
-        description: "Designed and developed the official company website with a focus on responsive design and user experience. Enforced front-end security basics and safe input handling.",
+        icon: <Globe className="w-6 h-6" />,
+        iconBg: "bg-[#F48120]/20",
+        iconColor: "text-[#F48120]",
+        description: "Designed and developed the official company website with a focus on responsive design and user experience.",
+        highlights: [
+            "Enforced front-end security basics and safe input handling",
+            "Optimized website performance and cross-browser compatibility",
+        ],
         tech: ["HTML/CSS/JS", "Responsive Design", "Frontend Security"],
     },
     {
         date: "2023",
         role: "Cyber Security Virtual Experience Program",
         company: "Deloitte, Forage",
-        description: "Completed a hands-on virtual job simulation in cyber security. Gained practical experience in identifying and responding to security threats, enhancing skills in threat analysis.",
+        icon: <Award className="w-6 h-6" />,
+        iconBg: "bg-[#86BC25]/20",
+        iconColor: "text-[#86BC25]",
+        description: "Completed a hands-on virtual job simulation in cyber security.",
+        highlights: [
+            "Gained practical experience in identifying and responding to security threats",
+            "Enhanced skills in threat analysis and security audits",
+        ],
         tech: ["Threat Analysis", "Security Audits"],
     },
 ];
@@ -41,7 +71,6 @@ export default function Experience() {
     const lineRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
-        // Draw the vertical line on scroll
         gsap.fromTo(
             lineRef.current,
             { scaleY: 0 },
@@ -57,7 +86,6 @@ export default function Experience() {
             }
         );
 
-        // Reveal each timeline entry
         const entries: HTMLElement[] = gsap.utils.toArray(".timeline-entry");
         entries.forEach((entry, i) => {
             const isOdd = i % 2 !== 0;
@@ -80,6 +108,8 @@ export default function Experience() {
 
     return (
         <section id="experience" ref={sectionRef} className="py-24 md:py-32 relative">
+            <div className="absolute top-1/3 left-0 w-[400px] h-[400px] bg-[#7c3aed]/5 blur-[120px] rounded-full pointer-events-none" />
+
             <div className="max-w-4xl mx-auto px-6">
                 <SectionHeading number="04." title="Experience" />
 
@@ -99,18 +129,45 @@ export default function Experience() {
                                     <div className="absolute left-[30px] md:left-1/2 w-4 h-4 rounded-full bg-accent transform -translate-x-[7px] md:-translate-x-1/2 mt-6 shadow-[0_0_10px_var(--accent)] z-10 border-4 border-bg-primary"></div>
 
                                     {/* Content Card */}
-                                    <div className={`ml-16 md:ml-0 md:w-5/12 bg-bg-card border border-border p-8 rounded-2xl group hover:-translate-y-2 hover:border-border-accent hover:shadow-[0_15px_40px_rgba(0,0,0,0.2),_0_0_20px_var(--accent-glow)] transition-all duration-400 ${isEven ? 'md:mr-8 text-left' : 'md:ml-8 text-left'}`}>
-                                        <div className="font-mono text-xs md:text-sm text-accent mb-3">{item.date}</div>
-                                        <h3 className="text-xl md:text-2xl font-bold text-text-primary mb-1">{item.role}</h3>
-                                        <h4 className="text-base text-text-secondary font-medium mb-4">{item.company}</h4>
+                                    <div className={`ml-16 md:ml-0 md:w-5/12 bg-bg-card border border-border rounded-2xl group hover:-translate-y-2 hover:border-border-accent hover:shadow-[0_15px_40px_rgba(0,0,0,0.2),_0_0_20px_var(--accent-glow)] transition-all duration-400 ${isEven ? 'md:mr-8' : 'md:ml-8'}`}>
 
-                                        <p className="text-text-muted text-sm leading-relaxed mb-6">
-                                            {item.description}
-                                        </p>
+                                        {/* Header with icon */}
+                                        <div className="p-6 pb-0 flex items-start gap-4">
+                                            <div className={`w-12 h-12 rounded-xl ${item.iconBg} flex items-center justify-center shrink-0 ${item.iconColor}`}>
+                                                {item.icon}
+                                            </div>
+                                            <div className="min-w-0">
+                                                <h3 className="text-lg md:text-xl font-bold text-text-primary leading-tight">{item.role}</h3>
+                                                <h4 className="text-sm text-accent font-medium mt-1">{item.company}</h4>
+                                                <span className="inline-block mt-2 px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-mono">{item.date}</span>
+                                            </div>
+                                        </div>
 
-                                        <ul className="flex flex-wrap gap-x-4 gap-y-2 font-mono text-xs text-text-dim">
-                                            {item.tech.map((t, i) => <li key={i} className="group-hover:text-text-secondary transition-colors">{t}</li>)}
-                                        </ul>
+                                        {/* Body */}
+                                        <div className="p-6 pt-4">
+                                            <p className="text-text-secondary text-sm leading-relaxed mb-4">
+                                                {item.description}
+                                            </p>
+
+                                            {/* Highlights */}
+                                            <ul className="space-y-2 mb-5">
+                                                {item.highlights.map((h, i) => (
+                                                    <li key={i} className="flex items-start gap-2 text-text-muted text-sm">
+                                                        <span className="text-accent text-xs mt-1.5 shrink-0">●</span>
+                                                        {h}
+                                                    </li>
+                                                ))}
+                                            </ul>
+
+                                            {/* Tech tags */}
+                                            <div className="flex flex-wrap gap-2">
+                                                {item.tech.map((t, i) => (
+                                                    <span key={i} className="px-3 py-1 rounded-full bg-bg-primary border border-border text-text-dim text-xs font-mono group-hover:text-text-secondary group-hover:border-accent/20 transition-colors">
+                                                        {t}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             );
