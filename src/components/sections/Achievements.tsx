@@ -85,19 +85,19 @@ export default function Achievements() {
                                 className="absolute inset-0 flex flex-col"
                             >
                                 {/* Image — full landscape view */}
-                                <div className="relative h-[55%] md:h-[60%] w-full bg-bg-card flex items-center justify-center">
+                                <div className="relative h-[65%] md:h-[60%] w-full bg-bg-card flex items-center justify-center">
                                     <Image
                                         src={activeItem.image}
                                         alt={activeItem.title}
                                         fill
-                                        className="object-contain"
+                                        className="object-cover md:object-contain"
                                         sizes="(max-width: 768px) 100vw, 800px"
                                     />
                                     <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-bg-card to-transparent" />
                                 </div>
 
                                 {/* Text */}
-                                <div className="relative h-[45%] md:h-[40%] bg-bg-card w-full flex flex-col items-center justify-center p-6 md:p-8 text-center">
+                                <div className="relative h-[35%] md:h-[40%] bg-bg-card w-full flex flex-col items-center justify-center p-6 md:p-8 text-center">
                                     <h3 className="text-xl md:text-2xl font-bold text-text-primary mb-3">{activeItem.title}</h3>
                                     <p className="text-text-secondary text-sm md:text-base max-w-2xl leading-relaxed">
                                         {activeItem.description}

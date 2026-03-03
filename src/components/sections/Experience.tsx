@@ -8,6 +8,20 @@ import { Newspaper, Building2, Globe, Award } from "lucide-react";
 
 const EXPERIENCE_DATA = [
     {
+        date: "Dec 2025",
+        role: "Technical & Security Operations Support",
+        company: "Confidential Government Project",
+        icon: <Building2 className="w-6 h-6" />,
+        iconBg: "bg-accent/20",
+        iconColor: "text-accent",
+        description: "Investigated email routing issue by validating DNS delegation and MX record paths.",
+        highlights: [
+            "Corrected nameserver entries and validated service recovery",
+            "Created RCA summary and configuration notes to avoid recurrence",
+        ],
+        tech: ["DNS Records", "nslookup", "dig", "WHOIS"],
+    },
+    {
         date: "Mar 2025 — Apr 2025",
         role: "IT/Infrastructure Support & Web Security Support",
         company: "Daily News 24",
@@ -21,20 +35,6 @@ const EXPERIENCE_DATA = [
             "Implemented comprehensive security measures for ongoing protection",
         ],
         tech: ["Wireshark", "Cloudflare WAF", "Incident Response"],
-    },
-    {
-        date: "Dec 2025",
-        role: "Technical & Security Operations Support",
-        company: "Confidential Government Project",
-        icon: <Building2 className="w-6 h-6" />,
-        iconBg: "bg-accent/20",
-        iconColor: "text-accent",
-        description: "Investigated email routing issue by validating DNS delegation and MX record paths.",
-        highlights: [
-            "Corrected nameserver entries and validated service recovery",
-            "Created RCA summary and configuration notes to avoid recurrence",
-        ],
-        tech: ["DNS Records", "nslookup", "dig", "WHOIS"],
     },
     {
         date: "2024",

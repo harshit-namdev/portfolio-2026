@@ -15,6 +15,7 @@ const FEATURED_PROJECTS = [
         github: "https://github.com/harshit-namdev",
         url: "https://www.syncnox.tech",
         image: "/images/projects/syncnox-website.png",
+        imageAlign: "object-top",
         icon: <Globe className="w-6 h-6" />,
         iconBg: "bg-[#3b82f6]/20",
         iconColor: "text-[#3b82f6]",
@@ -143,7 +144,7 @@ export default function Projects() {
                                     src={project.image}
                                     alt={project.title}
                                     fill
-                                    className="object-contain group-hover:scale-105 transition-transform duration-700"
+                                    className={`object-cover ${project.imageAlign || "object-center"} group-hover:scale-105 transition-transform duration-700`}
                                     sizes="(max-width: 768px) 100vw, 50vw"
                                 />
                             </div>

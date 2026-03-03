@@ -42,7 +42,7 @@ export default function Footer() {
                         )}
                     </p>
                     <p className="text-xs text-text-dim mt-1">
-                        © {new Date().getFullYear()} All rights reserved.
+                        © 2026 HARSHIT NAMDEV. All rights reserved.
                     </p>
                 </div>
             </div>

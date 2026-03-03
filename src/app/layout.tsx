@@ -25,6 +25,10 @@ const firaCode = Fira_Code({
 export const metadata: Metadata = {
   title: "Harshit Namdev — Cybersecurity Professional",
   description: "Cybersecurity professional specializing in penetration testing, web security, and ethical hacking. Based in Bhopal, MP.",
+  icons: {
+    icon: "/images/harshit-namdev.jpg",
+    apple: "/images/harshit-namdev.jpg",
+  },
 };
 
 export default function RootLayout({

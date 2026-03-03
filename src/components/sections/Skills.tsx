@@ -111,24 +111,24 @@ export default function Skills() {
             </div>
 
             {/* Infinite Marquee Strip */}
-            <div className="w-full relative py-6 bg-bg-card border-y border-border overflow-hidden flex whitespace-nowrap">
-                <div ref={marqueeRef} className="flex whitespace-nowrap animate-marquee">
-                    {[...ALL_SKILLS, ...ALL_SKILLS, ...ALL_SKILLS].map((skill, idx) => (
-                        <div key={idx} className="flex items-center mx-8">
+            <div className="w-full relative py-6 bg-bg-card border-y border-border overflow-hidden flex select-none">
+                <div className="flex shrink-0 animate-marquee items-center whitespace-nowrap">
+                    {[...ALL_SKILLS, ...ALL_SKILLS].map((skill, idx) => (
+                        <div key={idx} className="flex items-center mx-4 md:mx-8">
                             <span className="text-text-muted font-heading text-xl md:text-2xl uppercase tracking-wider font-bold">
                                 {skill}
                             </span>
-                            <span className="mx-8 text-accent">|</span>
+                            <span className="mx-4 md:mx-8 text-accent">|</span>
                         </div>
                     ))}
                 </div>
-                <div className="flex whitespace-nowrap animate-marquee absolute top-6 left-full">
-                    {[...ALL_SKILLS, ...ALL_SKILLS, ...ALL_SKILLS].map((skill, idx) => (
-                        <div key={`dup-${idx}`} className="flex items-center mx-8">
+                <div aria-hidden="true" className="flex shrink-0 animate-marquee items-center whitespace-nowrap">
+                    {[...ALL_SKILLS, ...ALL_SKILLS].map((skill, idx) => (
+                        <div key={`dup-${idx}`} className="flex items-center mx-4 md:mx-8">
                             <span className="text-text-muted font-heading text-xl md:text-2xl uppercase tracking-wider font-bold">
                                 {skill}
                             </span>
-                            <span className="mx-8 text-accent">|</span>
+                            <span className="mx-4 md:mx-8 text-accent">|</span>
                         </div>
                     ))}
                 </div>
