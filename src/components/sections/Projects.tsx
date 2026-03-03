@@ -2,12 +2,23 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { Github, ExternalLink, ShieldCheck, Cloud, Search, Shield, FlaskConical, Radar } from "lucide-react";
+import { Github, ExternalLink, ShieldCheck, Cloud, Search, Shield, FlaskConical, Radar, Globe } from "lucide-react";
 import { SectionHeading } from "../SectionHeading";
 import { useGSAP } from "@/hooks/useGSAP";
 import { gsap } from "gsap";
 
 const FEATURED_PROJECTS = [
+    {
+        title: "SyncNox — Tech Agency Website",
+        description: "Designed and developed a modern, responsive website for SyncNox, a digital solutions agency. Features a sleek dark-themed UI with smooth animations, product showcases, stats counters, and a professional contact flow.",
+        tech: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+        github: "https://github.com/harshit-namdev",
+        url: "https://www.syncnox.tech",
+        image: "/images/projects/syncnox-website.png",
+        icon: <Globe className="w-6 h-6" />,
+        iconBg: "bg-[#3b82f6]/20",
+        iconColor: "text-[#3b82f6]",
+    },
     {
         title: "StagnoLab",
         description: "Developing a secure data-hiding platform for images, docs, and pdf files. Features include drag & drop interface, password-protected encryption, and retrieval validation. Includes history tracking and advanced analysis for tamper detection.",
