@@ -135,6 +135,16 @@
     }
   }
 
+  @keyframes marquee-scroll {
+    0% {
+      transform: translateX(0%);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
   /* Aurora Background Effect */
   .aurora {
     position: absolute;

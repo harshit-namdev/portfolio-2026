@@ -111,15 +111,21 @@ export default function Skills() {
             </div>
 
             {/* Infinite Marquee Strip */}
-            <div className="w-full relative py-6 bg-bg-card border-y border-border overflow-hidden select-none">
-                <div className="flex w-max animate-marquee items-center whitespace-nowrap">
-                    {[...ALL_SKILLS, ...ALL_SKILLS, ...ALL_SKILLS, ...ALL_SKILLS].map((skill, idx) => (
-                        <div key={idx} className="flex items-center mx-4 md:mx-8">
-                            <span className="text-text-muted font-heading text-xl md:text-2xl uppercase tracking-wider font-bold">
+            <div className="w-full py-6 bg-bg-card border-y border-border overflow-hidden select-none">
+                <div
+                    className="flex items-center"
+                    style={{
+                        width: "max-content",
+                        animation: "marquee-scroll 40s linear infinite",
+                    }}
+                >
+                    {[...ALL_SKILLS, ...ALL_SKILLS].map((skill, idx) => (
+                        <span key={idx} className="flex items-center shrink-0">
+                            <span className="text-text-muted font-heading text-xl md:text-2xl uppercase tracking-wider font-bold whitespace-nowrap px-6 md:px-10">
                                 {skill}
                             </span>
-                            <span className="mx-4 md:mx-8 text-accent">|</span>
-                        </div>
+                            <span className="text-accent text-xl flex-shrink-0">|</span>
+                        </span>
                     ))}
                 </div>
             </div>
