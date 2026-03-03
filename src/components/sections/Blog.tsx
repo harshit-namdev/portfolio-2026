@@ -11,7 +11,7 @@ const BLOGS = [
     {
         title: "CISA's Guidance After: Oracle Cloud Hack",
         description: "The recent hack of Oracle Cloud has sent shockwaves through the cybersecurity community, exposing around 6 million records and affecting over 140,000 tenants.",
-        image: "/images/blogs/oracleimage.jpeg",
+        image: "/images/blogs/oracleimage.png",
         link: "https://www.linkedin.com/posts/harshit-namdev_cybersecurity-oraclecloud-cisa-activity-7319591620264312833-ui15",
     },
     {
