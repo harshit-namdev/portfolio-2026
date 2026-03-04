@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { Github, ExternalLink, ShieldCheck, Cloud, Search, Shield, FlaskConical, Radar, Globe } from "lucide-react";
+import { Github, ExternalLink, ShieldCheck, Cloud, Search, FlaskConical, Radar, Globe } from "lucide-react";
 import { SectionHeading } from "../SectionHeading";
 import { useGSAP } from "@/hooks/useGSAP";
 import { gsap } from "gsap";

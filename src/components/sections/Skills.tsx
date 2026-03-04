@@ -52,7 +52,6 @@ const ALL_SKILLS = SKILL_CATEGORIES.flatMap((c) => c.skills);
 
 export default function Skills() {
     const sectionRef = useRef<HTMLElement>(null);
-    const marqueeRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
         const categories: HTMLElement[] = gsap.utils.toArray(".skill-category");
