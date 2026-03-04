@@ -70,13 +70,16 @@ export default function Navbar() {
     return (
         <>
             <motion.nav
-                className={`fixed left-1/2 -translate-x-1/2 z-[100] transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] flex items-center justify-between
+                className={`fixed left-0 right-0 mx-auto z-[100] transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] flex items-center justify-between
           ${isScrolled
                         ? "top-4 w-[92%] max-w-4xl h-16 rounded-full bg-[#0a0a0a]/85 backdrop-blur-xl border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.4)] px-6 md:px-8"
                         : "top-0 w-full h-24 bg-transparent border border-transparent px-6 md:px-[10%]"
                     }
         `}
-                animate={{ y: isHidden && !isMobileMenuOpen ? "-150%" : 0 }}
+                initial={{ y: 0 }}
+                animate={{
+                    y: isHidden && !isMobileMenuOpen ? "-150%" : 0
+                }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
             >
                 <div className="flex-1">
